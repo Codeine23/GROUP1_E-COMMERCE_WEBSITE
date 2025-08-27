@@ -1,0 +1,222 @@
+products = [
+    {
+        "id": 1,
+        "name": "Wireless Headphones",
+        "image": "/static/images/products/headphones.png",
+        "original_price": 120,
+        "discount_price": 80,
+        "rating": 4.5,
+        "reviews": 220,
+        "tags": ["electronics", "featured", "best_seller"],
+        "sold": {"last7": 25, "last14": 50, "last30": 140}
+    },
+    {
+        "id": 2,
+        "name": "Smartphone Pro X",
+        "image": "/static/images/products/smartphone.jpeg",
+        "original_price": 999,
+        "discount_price": 899,
+        "rating": 4.8,
+        "reviews": 540,
+        "tags": ["electronics", "featured"],
+        "sold": {"last7": 45, "last14": 90, "last30": 260}
+    },
+    {
+        "id": 3,
+        "name": "Gaming Laptop",
+        "image": "/static/images/products/laptop.jpg",
+        "original_price": 1500,
+        "discount_price": 1299,
+        "rating": 4.7,
+        "reviews": 310,
+        "tags": ["electronics", "best_seller"],
+        "sold": {"last7": 15, "last14": 35, "last30": 100}
+    },
+    {
+        "id": 4,
+        "name": "Smartwatch Gen 5",
+        "image": "/static/images/products/smartwatch.jpeg",
+        "original_price": 250,
+        "discount_price": 180,
+        "rating": 4.2,
+        "reviews": 190,
+        "tags": ["wearables", "featured"],
+        "sold": {"last7": 12, "last14": 28, "last30": 75}
+    },
+    {
+        "id": 5,
+        "name": "4K LED TV",
+        "image": "/static/images/products/tv.jpg",
+        "original_price": 700,
+        "discount_price": 599,
+        "rating": 4.6,
+        "reviews": 400,
+        "tags": ["home_appliance", "featured", "best_seller"],
+        "sold": {"last7": 20, "last14": 55, "last30": 160}
+    },
+    {
+        "id": 6,
+        "name": "Bluetooth Speaker",
+        "image": "/static/images/products/speaker.jpeg",
+        "original_price": 150,
+        "discount_price": 110,
+        "rating": 4.4,
+        "reviews": 320,
+        "tags": ["electronics", "best_seller"],
+        "sold": {"last7": 30, "last14": 65, "last30": 180}
+    },
+    {
+        "id": 7,
+        "name": "DSLR Camera",
+        "image": "/static/images/products/camera.webp",
+        "original_price": 900,
+        "discount_price": 799,
+        "rating": 4.7,
+        "reviews": 210,
+        "tags": ["electronics", "featured"],
+        "sold": {"last7": 18, "last14": 40, "last30": 120}
+    },
+    {
+        "id": 8,
+        "name": "Running Shoes",
+        "image": "/static/images/products/shoes.png",
+        "original_price": 120,
+        "discount_price": 85,
+        "rating": 4.3,
+        "reviews": 180,
+        "tags": ["fashion", "best_seller"],
+        "sold": {"last7": 35, "last14": 70, "last30": 200}
+    },
+    {
+        "id": 9,
+        "name": "Leather Backpack",
+        "image": "/static/images/products/backpack.jpg",
+        "original_price": 90,
+        "discount_price": 70,
+        "rating": 4.1,
+        "reviews": 150,
+        "tags": ["fashion", "featured"],
+        "sold": {"last7": 10, "last14": 22, "last30": 60}
+    },
+    {
+        "id": 10,
+        "name": "Sunglasses Classic",
+        "image": "/static/images/products/sunglasses.webp",
+        "original_price": 60,
+        "discount_price": 45,
+        "rating": 4.0,
+        "reviews": 110,
+        "tags": ["fashion", "featured"],
+        "sold": {"last7": 8, "last14": 20, "last30": 50}
+    },
+    {
+        "id": 11,
+        "name": "Microwave Oven",
+        "image": "/static/images/products/microwave.jpg",
+        "original_price": 200,
+        "discount_price": 150,
+        "rating": 4.5,
+        "reviews": 230,
+        "tags": ["home_appliance", "best_seller"],
+        "sold": {"last7": 22, "last14": 48, "last30": 130}
+    },
+    {
+        "id": 12,
+        "name": "Air Conditioner",
+        "image": "/static/images/products/ac.jpeg",
+        "original_price": 600,
+        "discount_price": 520,
+        "rating": 4.3,
+        "reviews": 175,
+        "tags": ["home_appliance", "featured"],
+        "sold": {"last7": 14, "last14": 32, "last30": 95}
+    },
+    {
+        "id": 13,
+        "name": "Coffee Maker",
+        "image": "/static/images/products/coffeemaker.webp",
+        "original_price": 100,
+        "discount_price": 75,
+        "rating": 4.2,
+        "reviews": 95,
+        "tags": ["home_appliance", "best_seller"],
+        "sold": {"last7": 16, "last14": 38, "last30": 110}
+    },
+    {
+        "id": 14,
+        "name": "Yoga Mat",
+        "image": "/static/images/products/yogamat.jpg",
+        "original_price": 40,
+        "discount_price": 25,
+        "rating": 4.1,
+        "reviews": 80,
+        "tags": ["fitness", "featured"],
+        "sold": {"last7": 28, "last14": 60, "last30": 150}
+    },
+    {
+        "id": 15,
+        "name": "Dumbbell Set",
+        "image": "/static/images/products/dumbbells.jpg",
+        "original_price": 120,
+        "discount_price": 95,
+        "rating": 4.4,
+        "reviews": 135,
+        "tags": ["fitness", "best_seller"],
+        "sold": {"last7": 20, "last14": 46, "last30": 125}
+    },
+    {
+        "id": 16,
+        "name": "Office Chair",
+        "image": "/static/images/products/chair.jpeg",
+        "original_price": 250,
+        "discount_price": 200,
+        "rating": 4.3,
+        "reviews": 160,
+        "tags": ["furniture", "featured"],
+        "sold": {"last7": 11, "last14": 26, "last30": 70}
+    },
+    {
+        "id": 17,
+        "name": "Wooden Desk",
+        "image": "/static/images/products/desk.jpeg",
+        "original_price": 400,
+        "discount_price": 340,
+        "rating": 4.6,
+        "reviews": 210,
+        "tags": ["furniture", "best_seller"],
+        "sold": {"last7": 13, "last14": 30, "last30": 85}
+    },
+    {
+        "id": 18,
+        "name": "Table Lamp",
+        "image": "/static/images/products/lamp.jpg",
+        "original_price": 60,
+        "discount_price": 40,
+        "rating": 4.2,
+        "reviews": 95,
+        "tags": ["furniture", "featured"],
+        "sold": {"last7": 9, "last14": 18, "last30": 45}
+    },
+    {
+        "id": 19,
+        "name": "Men Shirt",
+        "image": "/static/images/products/shirt.png",
+        "original_price": 50,
+        "discount_price": 35,
+        "rating": 4.0,
+        "reviews": 65,
+        "tags": ["fashion", "best_seller"],
+        "sold": {"last7": 12, "last14": 25, "last30": 65}
+    },
+    {
+        "id": 20,
+        "name": "Perfume Deluxe",
+        "image": "/static/images/products/perfume.webp",
+        "original_price": 70,
+        "discount_price": 55,
+        "rating": 4.5,
+        "reviews": 140,
+        "tags": ["fashion", "featured", "best_seller"],
+        "sold": {"last7": 19, "last14": 42, "last30": 115}
+    }
+]

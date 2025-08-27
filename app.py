@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from dotenv import load_dotenv 
+from data.dummy_data import products
 
 
 load_dotenv()
@@ -47,11 +48,37 @@ with get_db_connection() as conn:
 # -------- ROUTES --------
 @app.route("/")
 def home():
-    return render_template("pages/home.html", username=session.get("username"))
+    # Filter for featured products
+    featured = [p for p in products if "featured" in p.get("tags", [])]
+
+    # Filter for best sellers
+    best_sellers = [p for p in products if "best_seller" in p.get("tags", [])]
+
+    return render_template(
+        "pages/home.html",
+        username=session.get("username"),
+        featured=featured,
+        best_sellers=best_sellers
+    )
 
 @app.route("/best-selling")
 def best_selling():
-    return render_template("pages/best_selling.html")
+    # default filter is last30
+    period = request.args.get("period", "last30")
+
+    # sort/filter products by the chosen period
+    sorted_products = sorted(
+        products,
+        key=lambda p: p["sold"][period],
+        reverse=True  # highest sold first
+    )
+
+    return render_template(
+        "pages/best_selling.html",
+        products=sorted_products,
+        period=period
+    )
+
 
 @app.route("/cart")
 @login_required

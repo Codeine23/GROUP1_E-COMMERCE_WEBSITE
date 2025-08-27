@@ -37,19 +37,14 @@
             id="main-nav">
             <li><a href="{{ url_for('home') }}"> Home</a></li>
             <li
-               ><a href="#"
-                  ><i class="fa-solid fa-fire"></i> Best-selling</a
+               ><a href="{{ url_for('best_selling') }}"
+                  ><i class="fa-solid fa-thumbs-up"></i> Best-selling</a
                ></li
             >
             <li class="dropdown">
-               <a href="#"> Categories <i class="fas fa-caret-down"></i></a>
-               <ul class="dropdown__menu">
-                  <li><a href="#">Electronics</a></li>
-                  <li><a href="#">Clothing</a></li>
-                  <li><a href="#">Books</a></li>
-               </ul>
+               <a href="#"> Categories </a>
             </li>
-            <li><a href="#"> About</a></li>
+            <li><a  href="{{ url_for('about') }}"> About</a></li>
             <li><a href="{{ url_for('contact') }}"> Contact</a></li>
          </ul>
 
@@ -85,19 +80,11 @@
                   ><i class="fa-solid fa-cart-shopping"></i> Cart</a
                ></li
             >
-            <li class="dropdown">
-               <a href="#"> English <i class="fas fa-caret-down"></i></a>
-               <ul class="dropdown__menu">
-                  <li><a href="#">English</a></li>
-                  <li><a href="#">Español</a></li>
-                  <li><a href="#">Français</a></li>
-               </ul>
-            </li>
          </nav>
       </header>
 
       <!-- Main content -->
-      <main class="container py-4"> {% block content %}{% endblock %} </main>
+      <main class="page-body-container"> {% block content %}{% endblock %} </main>
 
       <!-- Footer -->
       <footer class="footer">
@@ -120,7 +107,7 @@
             <!-- Support -->
             <div class="footer-col">
                <h4>Support</h4>
-               <p>111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</p>
+               <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
                <p>exclusive@gmail.com</p>
                <p>+88015-88888-9999</p>
             </div>

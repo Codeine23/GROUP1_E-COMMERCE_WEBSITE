@@ -1,3 +1,7 @@
+@import url("homepage.css");
+@import url("products.css");
+@import url("bestselling.css");
+@import url("about.css");
 /* Theme variables */
 :root {
    --color-primary: #1e6ec9;
@@ -36,6 +40,11 @@ body {
    line-height: 1.6;
 }
 
+.page-body-container {
+  margin: 60px 0;
+}
+
+
 /* Navbar */
 .header {
    position: fixed;
@@ -49,6 +58,7 @@ body {
    display: flex;
    justify-content: space-between;
    align-items: center;
+   z-index: 999;
 }
 
 .logo {
@@ -77,12 +87,12 @@ body {
    text-decoration: none;
    font-weight: bold;
    padding: 0.5rem;
-   border-radius: 999px; /* fully rounded */
+   border-radius: 999px;
    transition: all 0.3s ease;
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a:active {
    background: rgba(255, 255, 255, 0.1);
    padding: 0.5rem 1rem;
    backdrop-filter: blur(6px);

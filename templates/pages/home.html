@@ -1,32 +1,131 @@
-{% extends "layouts/base.html" %}
-
-{% block title %}Home - MyShop{% endblock %}
-
+{% extends "layouts/base.html" %} {% block title %}Home - ShopEase{% endblock %}
 {% block content %}
-  <h1 class="text-3xl font-bold mb-6">Welcome to MyShop</h1>
+<!-- Hero Section -->
+<section class="hero">
+   <div class="hero-content">
+      <h1>Welcome to ShopEase</h1>
+      <p>Your one-stop shop for everything you love.</p>
+      <a
+         href="/shop"
+         class="btn"
+         >Shop Now</a
+      >
+   </div>
+</section>
 
-  <!-- Search bar -->
-  <form action="/search" method="get" class="mb-6">
-    <input type="text" name="q" placeholder="Search products..."
-      class="border px-4 py-2 rounded w-1/2" />
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded ml-2">Search</button>
-  </form>
+<!-- Featured Products (Last Day Deals) -->
+<section class="products container">
+   <h2 class="products-section-header">Featured Deals</h2>
+   <div class="product-grid">
+      {% for product in featured %}
+      <div class="product-card">
+         <!-- Image Wrapper -->
+         <div class="product-image-wrapper">
+            <img
+               src="{{ product.image }}"
+               alt="{{ product.name }}" />
 
-  <!-- Product Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <!-- Example product card -->
-    <div class="bg-white shadow rounded-lg p-4">
-      <img src="https://via.placeholder.com/150" alt="Product" class="w-full h-40 object-cover rounded" />
-      <h2 class="text-lg font-semibold mt-2">Product Name</h2>
-      <p class="text-gray-600">$99.99</p>
-      <button class="bg-green-600 text-white px-3 py-1 rounded mt-2">Add to Cart</button>
-    </div>
+            <!-- Discount Blob -->
+            <span class="discount-badge">
+               -{{ ((1 - (product.discount_price / product.original_price)) *
+               100) | round(0) }}%
+            </span>
+         </div>
 
-    <div class="bg-white shadow rounded-lg p-4">
-      <img src="https://via.placeholder.com/150" alt="Product" class="w-full h-40 object-cover rounded" />
-      <h2 class="text-lg font-semibold mt-2">Another Product</h2>
-      <p class="text-gray-600">$59.99</p>
-      <button class="bg-green-600 text-white px-3 py-1 rounded mt-2">Add to Cart</button>
-    </div>
-  </div>
+         <!-- Meta Content -->
+         <div class="product-info">
+            <!-- Product Name -->
+            <h3 class="product-name">{{ product.name }}</h3>
+
+            <!-- Tags + Prices + Cart -->
+            <div class="product-meta">
+               <!-- Tags -->
+               <span class="tag">{{ product.tags.0 }}</span>
+
+               <!-- Price -->
+               <span class="price">
+                  <span class="discount-price"
+                     >${{ product.discount_price }}</span
+                  >
+                  <span class="original-price"
+                     >${{ product.original_price }}</span
+                  >
+               </span>
+
+               <!-- Cart Icon -->
+               <button class="cart-btn">🛒</button>
+            </div>
+
+            <!-- Rating -->
+            <div class="product-rating">
+               ⭐ {{ product.rating }} ({{ product.reviews }} reviews)
+            </div>
+         </div>
+      </div>
+
+      {% endfor %}
+   </div>
+</section>
+
+<!-- Best Sellers -->
+<section class="best-sellers container">
+   <h2 class="products-section-header">Explore best selling items</h2>
+   <div class="product-grid">
+      {% for product in best_sellers %}
+      <div class="product-card">
+         <!-- Image Wrapper -->
+         <div class="product-image-wrapper">
+            <img
+               src="{{ product.image }}"
+               alt="{{ product.name }}" />
+
+            <!-- Discount Blob -->
+            <span class="discount-badge">
+               -{{ ((1 - (product.discount_price / product.original_price)) *
+               100) | round(0) }}%
+            </span>
+         </div>
+
+         <!-- Meta Content -->
+         <div class="product-info">
+            <!-- Product Name -->
+            <h3 class="product-name">{{ product.name }}</h3>
+
+            <!-- Tags + Prices + Cart -->
+            <div class="product-meta">
+               <!-- Tags -->
+               <span class="tag">{{ product.tags.0 }}</span>
+
+               <!-- Price -->
+               <span class="price">
+                  <span class="discount-price"
+                     >${{ product.discount_price }}</span
+                  >
+                  <span class="original-price"
+                     >${{ product.original_price }}</span
+                  >
+               </span>
+
+               <!-- Cart Icon -->
+               <button class="cart-btn">🛒</button>
+            </div>
+
+            <!-- Rating -->
+            <div class="product-rating">
+               ⭐ {{ product.rating }} ({{ product.reviews }} reviews)
+            </div>
+         </div>
+      </div>
+
+      {% endfor %}
+   </div>
+   <div class="see-more">
+      <a
+         href="/bestsellers"
+         class="btn"
+         >See More</a
+      >
+   </div>
+</section>
+
 {% endblock %}

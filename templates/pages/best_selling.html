@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %} {% block content %}
+<div class="container">
+   <!-- Header + Filters -->
+   <div class="header-filters">
+      <h2 class="products-section-header">Best Selling Items</h2>
+      <div class="filters">
+         <a
+            href="{{ url_for('best_selling', period='last7') }}"
+            class="filter-btn {% if period=='last7' %}active{% endif %}">
+            Within Last 7 days
+         </a>
+         <a
+            href="{{ url_for('best_selling', period='last14') }}"
+            class="filter-btn {% if period=='last14' %}active{% endif %}">
+            Within Last 14 days
+         </a>
+         <a
+            href="{{ url_for('best_selling', period='last30') }}"
+            class="filter-btn {% if period=='last30' %}active{% endif %}">
+            Within Last 30 days
+         </a>
+      </div>
+   </div>
+
+   <!-- Product Grid -->
+   <div class="product-grid">
+      {% for product in products %}
+      <div class="product-card">
+         <div class="product-image-wrapper">
+            <img
+               src="{{ product.image }}"
+               alt="{{ product.name }}" />
+            {% if product.discount %}
+            <span class="discount-badge">{{ product.discount }}% OFF</span>
+            {% endif %}
+         </div>
+
+         <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <div class="product-meta">
+               {% for tag in product.tags %}
+               <span class="tag">{{ tag }}</span>
+               {% endfor %}
+            </div>
+
+            <div class="price">
+               {% if product.original_price %} {% endif %}
+               <span class="original-price">${{ product.discount_price }}</span>
+               <span class="sold"> <i class="fa fa-thumbs-up"></i> {{ product.sold[period] }} sold </span>
+               <button class="cart-btn">🛒</button>
+            </div>
+
+            <div class="product-rating"
+               >⭐ {{ product.rating }} ({{ product.reviews }} reviews)</div
+            >
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+{% endblock %}

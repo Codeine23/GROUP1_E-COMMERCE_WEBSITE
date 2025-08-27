@@ -1,0 +1,43 @@
+.container {
+  width: minmax(90%, 1440px);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Header + filters */
+.header-filters {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 30px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.filter-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #1e1e1e;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: 1px solid silver;
+}
+
+.filter-btn:hover {
+  background: #d1d1d1;
+}
+
+.filter-btn.active {
+  border: 1px solid #1e1e1e;
+}
+
+.sold {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+}
