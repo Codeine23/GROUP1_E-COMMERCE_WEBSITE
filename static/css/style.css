@@ -1,8 +1,10 @@
-@import url("homepage.css");
-@import url("products.css");
-@import url("bestselling.css");
-@import url("about.css");
-@import url("contactus.css");
+@import url('homepage.css');
+@import url('products.css');
+@import url('bestselling.css');
+@import url('about.css');
+@import url('contactus.css');
+@import url('auth.css');
+@import url('cart.css');
 /* Theme variables */
 :root {
    --color-primary: #1e6ec9;
@@ -39,7 +41,6 @@ body {
    background: var(--color-bg);
    color: var(--color-text);
 }
-
 
 /* Navbar */
 .header {
@@ -261,6 +262,55 @@ body {
 .subscribe-form button:hover {
    background: #e65c00;
 }
+
+/* flash message styling */
+
+.flash-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: auto;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flash-message {
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  animation: slideIn 0.4s ease, fadeOut 0.5s ease 4s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flash-message.success { background-color: #28a745; }  /* Green */
+.flash-message.error   { background-color: #dc3545; }  /* Red */
+.flash-message.info    { background-color: #17a2b8; }  /* Blue */
+.flash-message.warning { background-color: #ffc107; color: #000; } /* Yellow */
+
+.flash-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: inherit;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateX(100%); }
+}
+
 
 /* Responsive */
 @media (max-width: 992px) {

@@ -1,0 +1,59 @@
+{% extends "layouts/base.html" %} {% block content %}
+
+<section class="hero">
+   <div class="circle"></div>
+   <div class="hero-content">
+      <!-- Form -->
+      <div class="hero-text">
+         <div class="login-form">
+            <h1 class="form-heading">Login to ShopEase</h1>
+            <p class="form-subtext">Enter your details below</p>
+
+            <form
+               action="#"
+               method="POST">
+               <!-- Email or phone -->
+               <div class="form-group">
+                  <input
+                     type="text"
+                     placeholder="Email or Phone number"
+                     required />
+               </div>
+
+               <!-- Password -->
+               <div class="form-group">
+                  <input
+                     type="password"
+                     placeholder="Password"
+                     required />
+               </div>
+
+               <!-- Buttons -->
+               <div class="flex">
+                  <button
+                     type="submit"
+                     class="btn-primary"
+                     >Log In</button
+                  >
+                  <a href="/forgot-password"> Forgot password ?</a>
+               </div>
+
+               <!-- Login link -->
+               <p class="login-link">
+                  Don't have an account ?
+                  <a href="/register">Sign up</a>
+               </p>
+            </form>
+         </div>
+      </div>
+
+      <!-- Image -->
+      <div class="hero-image">
+         <img
+            src="/static/images/more/homeheroimage.png"
+            alt="Register Hero Image" />
+      </div>
+   </div>
+</section>
+
+{% endblock %}

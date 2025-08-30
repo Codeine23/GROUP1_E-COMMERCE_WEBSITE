@@ -102,7 +102,6 @@ section h2 {
 /* Responsive */
 @media (max-width: 768px) {
    .hero-content {
-      display: flex;
       flex-direction: column-reverse;
    }
    .hero-container {

@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<section class="hero">
+   <!-- Flash Messages -->
+   {% with messages = get_flashed_messages(with_categories=true) %}
+   {% if messages %}
+      <div class="flash-container">
+         {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+               <span>{{ message }}</span>
+               <button
+                  class="flash-close"
+                  onclick="this.parentElement.style.display='none'">
+                  ✖
+               </button>
+            </div>
+         {% endfor %}
+      </div>
+   {% endif %}
+   {% endwith %}
+
+   <div class="circle"></div>
+   <div class="hero-content">
+      <!-- Image -->
+      <div class="hero-image">
+         <img
+            src="/static/images/more/homeheroimage.png"
+            alt="Register Hero Image" />
+      </div>
+
+      <!-- Form -->
+      <div class="hero-text">
+         <div class="register-form">
+            <h1 class="form-heading">Create an account</h1>
+            <p class="form-subtext">Enter your details below</p>
+
+            <form action="{{ url_for('register') }}" method="POST">
+               <!-- Username -->
+               <div class="form-group">
+                  <input
+                     type="text"
+                     name="username"
+                     placeholder="Username"
+                     required />
+               </div>
+
+               <!-- Email -->
+               <div class="form-group">
+                  <input
+                     type="email"
+                     name="email"
+                     placeholder="Email"
+                     required />
+               </div>
+
+               <!-- Password -->
+               <div class="form-group">
+                  <input
+                     type="password"
+                     name="password"
+                     placeholder="Password"
+                     required />
+               </div>
+
+               <!-- Confirm Password -->
+               <div class="form-group">
+                  <input
+                     type="password"
+                     name="confirm_password"
+                     placeholder="Confirm Password"
+                     required />
+               </div>
+
+               <!-- Submit Button -->
+               <button type="submit" class="btn-primary">
+                  Create an account
+               </button>
+
+               <!-- Google Button -->
+               <button type="button" class="btn-google">
+                  <i class="fab fa-google"></i> Sign up with Google
+               </button>
+
+               <!-- Login Link -->
+               <p class="login-link">
+                  Already have an account?
+                  <a href="/login">Login</a>
+               </p>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}

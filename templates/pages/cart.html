@@ -1,0 +1,64 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div class="cart-container">
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="{{ url_for('home') }}">Home</a> &gt; <span>Cart</span>
+  </nav>
+
+  <div class="cart-grid">
+    <!-- Left: Cart Items -->
+    <div class="cart-items">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Example row -->
+          <tr>
+            <td>Sample Product</td>
+            <td>$20</td>
+            <td>
+              <input type="number" value="1" min="1" class="qty-input">
+            </td>
+            <td>$20</td>
+          </tr>
+          <tr>
+            <td>Another Item</td>
+            <td>$15</td>
+            <td>
+              <input type="number" value="2" min="1" class="qty-input">
+            </td>
+            <td>$30</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Right: Checkout Summary -->
+    <div class="cart-summary">
+      <h3>Cart Total</h3>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>$50</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span>$5</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span>$55</span>
+      </div>
+      <button class="checkout-btn">Continue to Checkout</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
