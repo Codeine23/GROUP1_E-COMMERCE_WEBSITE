@@ -38,6 +38,7 @@ with get_db_connection() as conn:
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
+            email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL
         )
     """)
@@ -81,7 +82,7 @@ def best_selling():
 
 
 @app.route("/cart")
-@login_required
+# @login_required
 def cart():
     return render_template("pages/cart.html")
 
@@ -133,10 +134,13 @@ def login():
 
     return render_template("auth/login.html")
 
+
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
