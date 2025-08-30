@@ -2,6 +2,7 @@
 @import url("products.css");
 @import url("bestselling.css");
 @import url("about.css");
+@import url("contactus.css");
 /* Theme variables */
 :root {
    --color-primary: #1e6ec9;
@@ -37,11 +38,6 @@ body {
    font-family: var(--font-base);
    background: var(--color-bg);
    color: var(--color-text);
-   line-height: 1.6;
-}
-
-.page-body-container {
-  margin: 60px 0;
 }
 
 
@@ -179,7 +175,7 @@ body {
       top: 60px;
    }
    .nav-links.right {
-      top: 210px; /* push it below the left nav */
+      top: 180px; /* push it below the left nav */
    }
 
    .nav-links.show {
@@ -188,6 +184,7 @@ body {
    .hamburger {
       display: block;
       color: white;
+      margin-right: 1rem;
    }
    .search-form {
       display: none; /* optional: hide search bar on mobile */

@@ -1,0 +1,55 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero contact">
+   <div class="circle"></div>
+   
+   <div class="contact-container">
+      <!-- Left Side (single white box) -->
+      <div class="contact-info">
+         <div class="info-box">
+            <!-- Call to Us -->
+            <div class="info-section">
+               <div class="info-header">
+                  <i class="fas fa-phone"></i>
+                  <h4>Call to Us</h4>
+               </div>
+               <p>We are available 24/7, 7 days a week.</p>
+               <p><strong>Phone:</strong> +8801611112222</p>
+            </div>
+
+            <!-- Write to Us -->
+            <div class="info-section">
+               <div class="info-header">
+                  <i class="fas fa-envelope"></i>
+                  <h4>Write to Us</h4>
+               </div>
+               <p>Fill out our form and we will contact you within 24 hours.</p>
+               <p><strong>Email:</strong> customer@shopease.com</p>
+               <p><strong>Email:</strong> support@shopease.com</p>
+            </div>
+         </div>
+      </div>
+
+      <!-- Right Side (form) -->
+      <div class="contact-form">
+         <form>
+            <!-- Name, Email, Phone on the same row -->
+            <div class="form-row">
+               <input type="text" placeholder="Your Name" required />
+               <input type="email" placeholder="Your Email" required />
+               <input type="tel" placeholder="Your Phone" required />
+            </div>
+            
+            <!-- Message -->
+            <textarea placeholder="Your Message" required></textarea>
+            
+            <!-- Button -->
+            <button type="submit" class="btn">Send Message</button>
+         </form>
+      </div>
+   </div>
+</section>
+
+{% endblock %}
