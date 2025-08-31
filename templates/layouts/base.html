@@ -35,17 +35,41 @@
          <ul
             class="nav-links left"
             id="main-nav">
-            <li><a href="{{ url_for('home') }}"> Home</a></li>
             <li
-               ><a href="{{ url_for('best_selling') }}"
+               ><a
+                  href="{{ url_for('home') }}"
+                  class="{% if request.endpoint == 'home' %}active{% endif %}">
+                  Home</a
+               ></li
+            >
+            <li
+               ><a
+                  href="{{ url_for('best_selling') }}"
+                  class="{% if request.endpoint == 'best_selling' %}active{% endif %}"
                   ><i class="fa-solid fa-thumbs-up"></i> Best-selling</a
                ></li
             >
             <li class="dropdown">
-               <a href="#"> Categories </a>
+               <a
+                  href="#"
+                  class="{% if request.endpoint == 'Categories' %}active{% endif %}">
+                  Categories
+               </a>
             </li>
-            <li><a href="{{ url_for('about') }}"> About</a></li>
-            <li><a href="{{ url_for('contact') }}"> Contact</a></li>
+            <li
+               ><a
+                  href="{{ url_for('about') }}"
+                  class="{% if request.endpoint == 'about' %}active{% endif %}">
+                  About</a
+               ></li
+            >
+            <li
+               ><a
+                  href="{{ url_for('contact') }}"
+                  class="{% if request.endpoint == 'contact' %}active{% endif %}">
+                  Contact</a
+               ></li
+            >
          </ul>
 
          <!-- Search Bar -->
@@ -68,7 +92,27 @@
             class="nav-links right"
             id="right-nav">
             {% if username %}
-            <li class="user-logged">Hi, {{ username }}</li>
+            <li class="dropdown">
+               <a href="#">
+                  {{ username }} <i class="fas fa-caret-down"></i>
+               </a>
+               <ul class="dropdown__menu">
+                  <li
+                     ><a href="">
+                        <i class="fa-solid fa-user"></i> Profile</a
+                     ></li
+                  >
+                  <li
+                     ><a
+                        href="{{ url_for('logout') }}"
+                        class="logout-link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout</a
+                     ></li
+                  >
+               </ul>
+            </li>
             {% if is_admin %}
             <li>
                <a href="{{ url_for('admin') }}">Admin</a>
@@ -91,6 +135,24 @@
             </li>
          </nav>
       </header>
+
+      <!-- 🔔 Flash Messages (just after navbar, before main content) -->
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="flash-container">
+         {% for category, message in messages %}
+         <div class="flash-message flash-{{ category }}">
+            <span>{{ message }}</span>
+            <button
+               class="flash-close"
+               onclick="this.parentElement.style.display='none'">
+               ✖
+            </button>
+         </div>
+         {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
 
       <!-- Main content -->
       <main class="page-body-container">
