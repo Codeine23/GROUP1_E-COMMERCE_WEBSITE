@@ -12,7 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 DB_NAME = os.getenv("DB_NAME")
 
@@ -37,7 +37,7 @@ with get_db_connection() as conn:
     conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
+            username TEXT NOT NULL,
             email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL
         )
@@ -102,22 +102,52 @@ def about():
 def last_days():
     return render_template("pages/last30days.html")
 
-#----------------------------------
+@app.route("/shoes")
+def shoes():
+    return render_template("pages/shoes.html")
+
+@app.route("/wishlist")
+@login_required
+def wishlist():
+    return render_template("pages/wishlist.html")
+
+@app.route("/men_clothings")
+def men():
+    return render_template("pages/men_clothings.html")
+
+@app.route("/women_clothings")
+def women():
+    return render_template("pages/women_clothings.html")
+
+@app.route("/search")
+def search():
+    query = request.args.get("q")
+    return f"Search results for: {query}"
+
+
+#------------ AUTH ------------
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username", "").strip()
+        email = request.form.get("email", "").strip()
         password = request.form.get("password", "")
 
-        if not username or not password:
+        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+            session.clear()
+            session["username"] = ADMIN_EMAIL
+            session["is_admin"] = True
+            flash("Welcome admin!", "success")
+            return redirect(url_for("admin_dashboard"))
+
+        elif not email or not password:
             flash("Username and password are required.", "danger")
             return redirect(url_for("login"))
 
         conn = get_db_connection()
         user = conn.execute(
-            "SELECT * FROM users WHERE username = ?",
-            (username,)
+            "SELECT * FROM users WHERE email = ?",
+            (email,)
         ).fetchone()
         conn.close()
 
@@ -153,44 +183,30 @@ def register():
 
         conn = get_db_connection()
         try:
-            conn.execute('INSERT INTO users (username, password) VALUES (?, ?)',
-                         (username, hashed_password))
+            conn.execute('INSERT INTO users (email, username, password) VALUES (?, ?, ?)',
+                         (email, username, hashed_password))
             conn.commit()
             flash('Registration successful! Please log in.', 'success')
             return redirect(url_for('login'))
-        except sqlite3.IntegrityError:
-            flash('Username already exists. Choose another.', 'danger')
+        except sqlite3.IntegrityError as e:
+            if "email" in str(e).lower():
+                flash('Email already exists. Choose another.', 'danger')
+            else:
+                flash('An error occurred. Please try again.', 'danger')
             return redirect(url_for('register'))
         finally:
             conn.close()
     return render_template("auth/register.html")
 
-
-
-@app.route("/shoes")
-def shoes():
-    return render_template("pages/shoes.html")
-
-@app.route("/wishlist")
-@login_required
-def wishlist():
-    return render_template("pages/wishlist.html")
-
-@app.route("/men_clothings")
-def men():
-    return render_template("pages/men_clothings.html")
-
-@app.route("/women_clothings")
-def women():
-    return render_template("pages/women_clothings.html")
-
-@app.route("/search")
-def search():
-    query = request.args.get("q")
-    return f"Search results for: {query}"
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("You have been logged out.", "info")
+    return redirect(url_for("home"))
 
 
 # -------- ADMIN ROUTES --------
+"""
 @app.route("/admin/admin_login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
@@ -208,11 +224,36 @@ def admin_login():
         return redirect(url_for("admin_login"))
 
     return render_template("admin/admin_login.html")
+"""
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("is_admin"):
+            flash("Admin access only.", "danger")
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route("/admin/dashboard")
+@admin_required
 def admin_dashboard():
-    return render_template("admin/dashboard.html")
+    conn = get_db_connection()
+    users = conn.execute("SELECT id, username, email, password FROM users").fetchall()
+    conn.close()
+    return render_template("admin/dashboard.html", users=users)
+
+
+@app.route("/admin/delete_user/<int:user_id>", methods=["POST", "GET"])
+@admin_required
+def delete_user(user_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM users WHERE id = ?", (user_id,))
+    conn.commit()
+    conn.close()
+    flash("User deleted successfully.", "success")
+    return redirect(url_for("admin_dashboard"))
+
 
 @app.route("/admin/add_product")
 def add_product():

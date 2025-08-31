@@ -1,0 +1,24 @@
+<h1>Admin Dashboard - Users</h1>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Hashed Password</th>
+        <th>Actions</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user['id'] }}</td>
+        <td>{{ user['username'] }}</td>
+        <td>{{ user['email'] }}</td>
+        <td>{{ user['password'][:20] }}...</td> <!-- short display for readability -->
+        <td>
+            <a href="{{ url_for('delete_user', user_id=user['id']) }}"
+               onclick="return confirm('Are you sure you want to delete this user?')">
+               Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
