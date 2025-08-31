@@ -142,12 +142,12 @@
       messages %}
       <div class="flash-container">
          {% for category, message in messages %}
-         <div class="flash-message flash-{{ category }}">
+         <div class="flash-message {{ category }}">
             <span>{{ message }}</span>
             <button
                class="flash-close"
                onclick="this.parentElement.style.display='none'">
-               ✖
+               <i class="fa-solid fa-xmark"></i>
             </button>
          </div>
          {% endfor %}

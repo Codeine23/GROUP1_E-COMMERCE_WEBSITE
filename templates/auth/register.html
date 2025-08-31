@@ -2,23 +2,6 @@
 {% block content %}
 
 <section class="hero">
-   <!-- Flash Messages -->
-   {% with messages = get_flashed_messages(with_categories=true) %}
-   {% if messages %}
-      <div class="flash-container">
-         {% for category, message in messages %}
-            <div class="flash-message flash-{{ category }}">
-               <span>{{ message }}</span>
-               <button
-                  class="flash-close"
-                  onclick="this.parentElement.style.display='none'">
-                  ✖
-               </button>
-            </div>
-         {% endfor %}
-      </div>
-   {% endif %}
-   {% endwith %}
 
    <div class="circle"></div>
    <div class="hero-content">

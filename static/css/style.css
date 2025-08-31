@@ -311,7 +311,7 @@ body {
 
 .flash-container {
    position: fixed;
-   top: 20px;
+   top: 60px;
    right: 20px;
    width: auto;
    z-index: 9999;
@@ -335,7 +335,8 @@ body {
 .flash-message.success {
    background-color: #28a745;
 } /* Green */
-.flash-message.error {
+.flash-message.error,
+.flash-message.danger {
    background-color: #dc3545;
 } /* Red */
 .flash-message.info {
