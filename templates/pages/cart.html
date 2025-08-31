@@ -2,10 +2,15 @@
 <div class="cart-container">
    <!-- Breadcrumbs -->
    <nav class="breadcrumbs">
-      <a href="{{ url_for('home') }}">Home</a> / <span>Cart</span>
+      <a class="breadcrumb-grey" href="{{ url_for('home') }}">Home</a> / <a class="breadcrumb-active"> Cart </a>
    </nav>
 
    <div class="cart-grid">
+      <!-- {% if not cart_items %}
+      <div class="empty-cart">
+         <p>Your cart is empty.</p>
+      </div>
+      {% endif %} -->
       <!-- Left: Cart Items -->
       <div class="cart-items">
          <div class="cart-header">
@@ -63,7 +68,11 @@
             <span>Total</span>
             <span>$55</span>
          </div>
-         <button class="checkout-btn">Continue to Checkout</button>
+         <button
+            class="checkout-btn"
+            onclick="window.location.href='/checkout'">
+            Continue to Checkout
+         </button>
       </div>
    </div>
 </div>

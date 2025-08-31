@@ -5,6 +5,7 @@
 @import url('contactus.css');
 @import url('auth.css');
 @import url('cart.css');
+@import url('checkout.css');
 /* Theme variables */
 :root {
    --color-primary: #1e6ec9;
@@ -78,7 +79,7 @@ body {
    text-wrap: nowrap;
 }
 
-.nav-links a {
+.nav-links a, .user-logged {
    font-size: 0.8rem;
    color: var(--color-light);
    text-decoration: none;
@@ -89,7 +90,7 @@ body {
 }
 
 .nav-links a:hover,
-.nav-links a:active {
+.nav-links a:active, .user-logged {
    background: rgba(255, 255, 255, 0.1);
    padding: 0.5rem 1rem;
    backdrop-filter: blur(6px);

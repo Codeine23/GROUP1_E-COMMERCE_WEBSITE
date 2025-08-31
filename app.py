@@ -26,7 +26,12 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
+@app.context_processor
+def inject_user():
+    return dict(
+        username=session.get("username"),
+        is_admin=session.get("role") == "admin"
+    )
 # -------- DATABASE CONNECTION --------
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
@@ -82,9 +87,15 @@ def best_selling():
 
 
 @app.route("/cart")
-# @login_required
+@login_required
 def cart():
     return render_template("pages/cart.html")
+
+
+@app.route("/checkout")
+@login_required
+def checkout():
+    return render_template("pages/checkout.html")
 
 @app.route("/contact-us")
 def contact():

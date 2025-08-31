@@ -8,8 +8,12 @@
    font-size: 14px;
 }
 
-.breadcrumbs a {
+.breadcrumb-active {
    color: #007bff;
+   text-decoration: none;
+}
+.breadcrumb-grey {
+   color: #3c3d3e;
    text-decoration: none;
 }
 
