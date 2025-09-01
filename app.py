@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from dotenv import load_dotenv 
 from data.dummy_data import products
-from utils.cart import add_to_cart, remove_from_cart
+from utils.cart import add_to_cart, remove_from_cart, get_cart_items
 
 
 load_dotenv()
@@ -91,21 +91,7 @@ def best_selling():
 @app.route("/cart")
 @login_required
 def cart():
-    # cart stored as {product_id: quantity}
-    cart_dict = session.get('cart', {})
-
-    cart_items_with_details = []
-    subtotal = 0
-    
-    for product_id, quantity in cart_dict.items():
-        product = next((p for p in products if p['id'] == int(product_id)), None)
-        if product:
-            product_with_qty = product.copy()
-            product_with_qty["quantity"] = quantity
-            product_with_qty["subtotal"] = product["discount_price"] * quantity
-            cart_items_with_details.append(product_with_qty)
-
-            subtotal += product_with_qty["subtotal"]
+    cart_items_with_details, subtotal = get_cart_items()
     
     shipping = 5 if subtotal > 0 else 0
     total = subtotal + shipping
@@ -147,7 +133,17 @@ def update_cart(product_id):
 @app.route("/checkout")
 @login_required
 def checkout():
-    return render_template("pages/checkout.html")
+    cart_items_with_details, subtotal = get_cart_items()
+    shipping = 5 if subtotal > 0 else 0
+
+    total = subtotal + shipping
+    return render_template(
+        "pages/checkout.html",
+        cart_items=cart_items_with_details,
+        shipping=shipping,
+        subtotal=subtotal,
+        total=total
+        )
 
 @app.route("/contact-us")
 def contact():

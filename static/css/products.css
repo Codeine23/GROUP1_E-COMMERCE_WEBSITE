@@ -5,8 +5,8 @@
 }
 
 .products-section-header {
-    font-size: 1.5rem;
-    font-weight: 800;
+   font-size: 1.5rem;
+   font-weight: 800;
 }
 
 .product-card {
@@ -88,9 +88,9 @@
 
 .cart-btn {
    background: transparent;
-   
+
    border: 1px solid var(--color-primary);
-   border-radius: .25rem;
+   border-radius: 0.25rem;
    font-size: 1.2rem;
    cursor: pointer;
    margin-left: auto;
@@ -114,7 +114,10 @@
 }
 
 .see-more .btn {
-    font-size: .75rem;
-    padding: .5rem 2rem;
-    border-radius: 48px;
+   text-decoration: none;
+   display: block;
+   font-size: 0.8rem;
+   font-weight: bold;
+   padding: .75rem 2rem;
+   border-radius: 48px;
 }
