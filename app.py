@@ -5,6 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from dotenv import load_dotenv 
 from data.dummy_data import products
+from utils.cart import add_to_cart, remove_from_cart, get_cart_items
+from utils.products import get_product
 
 
 load_dotenv()
@@ -30,7 +32,8 @@ def login_required(f):
 def inject_user():
     return dict(
         username=session.get("username"),
-        is_admin=session.get("role") == "admin"
+        is_admin=session.get("role") == "admin",
+        cart=session.get("cart", {})
     )
 # -------- DATABASE CONNECTION --------
 def get_db_connection():
@@ -85,17 +88,73 @@ def best_selling():
         period=period
     )
 
+@app.route("/product/<int:product_id>")
+def product_detail(product_id):
+    product = get_product(product_id)
+    
+    if not product:
+        flash("Product not found.", "danger")
+        return redirect(url_for("home"))
+    
+    return render_template("pages/product_detail.html", product=product)
+
 
 @app.route("/cart")
 @login_required
 def cart():
-    return render_template("pages/cart.html")
+    cart_items_with_details, subtotal = get_cart_items()
+    
+    shipping = 5 if subtotal > 0 else 0
+    total = subtotal + shipping
 
+    return render_template(
+        "pages/cart.html", cart_items=cart_items_with_details,
+        subtotal=subtotal,
+        shipping=shipping,
+        total=total
+    )
+
+
+@app.route("/add_to_cart/<int:product_id>")
+def add(product_id):
+    add_to_cart(product_id)
+    flash("Item added to cart", "success")
+    return redirect(request.referrer or url_for('home'))
+
+
+@app.route("/remove_from_cart/<int:product_id>")
+def remove(product_id):
+    remove_from_cart(product_id)
+    flash("Item removed from cart", "info")
+    return redirect(request.referrer or url_for('home'))
+
+@app.route('/update_cart/<product_id>', methods=["POST"])
+def update_cart(product_id):
+    qty = int(request.form.get("quantity", 1))
+    cart = session.get("cart", {})
+    product_id = str(product_id)
+
+    if qty > 0:
+        cart[product_id] = qty
+    else:
+        cart.pop(product_id, None)
+    session["cart"] = cart
+    return redirect(url_for("cart"))
 
 @app.route("/checkout")
 @login_required
 def checkout():
-    return render_template("pages/checkout.html")
+    cart_items_with_details, subtotal = get_cart_items()
+    shipping = 5 if subtotal > 0 else 0
+
+    total = subtotal + shipping
+    return render_template(
+        "pages/checkout.html",
+        cart_items=cart_items_with_details,
+        shipping=shipping,
+        subtotal=subtotal,
+        total=total
+        )
 
 @app.route("/contact-us")
 def contact():

@@ -60,7 +60,10 @@
                </span>
 
                <!-- Cart Icon -->
-               <button class="cart-btn">🛒</button>
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i> </a
+               ></button>
             </div>
 
             <!-- Rating -->
@@ -75,7 +78,7 @@
 </section>
 
 <!-- Best Sellers -->
-<section class="best-sellers container">
+<section class="products container">
    <h2 class="products-section-header">Explore best selling items</h2>
    <div class="product-grid">
       {% for product in best_sellers %}
@@ -114,7 +117,10 @@
                </span>
 
                <!-- Cart Icon -->
-               <button class="cart-btn">🛒</button>
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i> </a
+               ></button>
             </div>
 
             <!-- Rating -->
@@ -128,7 +134,7 @@
    </div>
    <div class="see-more">
       <a
-         href="/bestsellers"
+         href="/bestselling"
          class="btn"
          >See More</a
       >

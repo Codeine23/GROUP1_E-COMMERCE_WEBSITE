@@ -5,8 +5,8 @@
 }
 
 .products-section-header {
-    font-size: 1.5rem;
-    font-weight: 800;
+   font-size: 1.5rem;
+   font-weight: 800;
 }
 
 .product-card {
@@ -88,10 +88,18 @@
 
 .cart-btn {
    background: transparent;
-   border: none;
+
+   border: 1px solid var(--color-primary);
+   border-radius: 0.25rem;
    font-size: 1.2rem;
    cursor: pointer;
    margin-left: auto;
+}
+
+.cart-btn a {
+   display: block;
+   padding: 0.2rem;
+   text-decoration: none;
 }
 
 .product-rating {
@@ -106,7 +114,10 @@
 }
 
 .see-more .btn {
-    font-size: .75rem;
-    padding: .5rem 2rem;
-    border-radius: 48px;
+   text-decoration: none;
+   display: block;
+   font-size: 0.8rem;
+   font-weight: bold;
+   padding: .75rem 2rem;
+   border-radius: 48px;
 }

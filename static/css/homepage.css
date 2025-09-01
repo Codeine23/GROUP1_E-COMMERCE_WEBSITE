@@ -93,6 +93,11 @@
 }
 
 /* Section headings */
+.products.container {
+  width: minmax(90%, 1440px);
+  margin: 0 auto;
+  padding: 80px 20px;
+}
 section h2 {
    font-size: 2rem;
    margin-bottom: 20px;

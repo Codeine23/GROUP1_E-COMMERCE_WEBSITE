@@ -2,16 +2,22 @@
 <div class="cart-container">
    <!-- Breadcrumbs -->
    <nav class="breadcrumbs">
-      <a class="breadcrumb-grey" href="{{ url_for('home') }}">Home</a> / <a class="breadcrumb-active"> Cart </a>
+      <a
+         class="breadcrumb-grey"
+         href="{{ url_for('home') }}"
+         >Home</a
+      >
+      / <a class="breadcrumb-active"> Cart </a>
    </nav>
 
    <div class="cart-grid">
-      <!-- {% if not cart_items %}
+      <!-- Left: Cart Items -->
+      {% if not cart_items %}
       <div class="empty-cart">
          <p>Your cart is empty.</p>
       </div>
-      {% endif %} -->
-      <!-- Left: Cart Items -->
+
+      {% else %}
       <div class="cart-items">
          <div class="cart-header">
             <div class="header-item">Product</div>
@@ -20,37 +26,28 @@
             <div class="header-item">Subtotal</div>
          </div>
 
-         <!-- Example row 1 -->
+         {% for item in cart_items %}
          <div class="cart-item">
             <div class="cart-item-info">
-               <span class="product-name">Sample Product</span>
+               <span class="product-name">{{ item.name}}</span>
             </div>
-            <div class="price">$20</div>
+            <div class="price">${{item.discount_price}}</div>
             <div class="quantity">
-               <input
-                  type="number"
-                  value="1"
-                  min="1"
-                  class="qty-input" />
+               <form
+                  action="{{ url_for('update_cart', product_id=item.id) }}"
+                  method="POST">
+                  <input
+                     name="quantity"
+                     type="number"
+                     value="{{ item.quantity}}"
+                     min="0"
+                     onchange="this.form.submit()"
+                     class="qty-input" />
+               </form>
             </div>
-            <div class="subtotal">$20</div>
+            <div class="subtotal">${{item.subtotal}}</div>
          </div>
-
-         <!-- Example row 2 -->
-         <div class="cart-item">
-            <div class="cart-item-info">
-               <span class="product-name">Another Item</span>
-            </div>
-            <div class="price">$15</div>
-            <div class="quantity">
-               <input
-                  type="number"
-                  value="2"
-                  min="1"
-                  class="qty-input" />
-            </div>
-            <div class="subtotal">$30</div>
-         </div>
+         {% endfor %}
       </div>
 
       <!-- Right: Checkout Summary -->
@@ -58,15 +55,15 @@
          <h3>Cart Total</h3>
          <div class="summary-row">
             <span>Subtotal</span>
-            <span>$50</span>
+            <span>${{ subtotal }}</span>
          </div>
          <div class="summary-row">
             <span>Shipping</span>
-            <span>$5</span>
+            <span>${{ shipping }}</span>
          </div>
          <div class="summary-row total">
             <span>Total</span>
-            <span>$55</span>
+            <span>${{ total }}</span>
          </div>
          <button
             class="checkout-btn"
@@ -74,6 +71,7 @@
             Continue to Checkout
          </button>
       </div>
+      {% endif %}
    </div>
 </div>
 {% endblock %}

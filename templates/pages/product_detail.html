@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="product-detail-container">
+   <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p>{{ product.description }}</p>
+      <div class="price">
+         {% if product.discount_price %}
+            <span class="old-price">${{ product.price }}</span>
+            <span class="discount-price">${{ product.discount_price }}</span>
+         {% else %}
+            <span>${{ product.price }}</span>
+         {% endif %}
+      </div>
+      <div class="rating">
+         ⭐ {{ product.rating }} / 5
+      </div>
+      <a href="{{ url_for('add', product_id=product.id) }}" class="btn">
+         Add to Cart
+      </a>
+   </div>
+</div>
+{% endblock %}
