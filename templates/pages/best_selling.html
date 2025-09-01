@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %} {% block content %}
-<div class="container">
+<div class="bestselling-container">
    <!-- Header + Filters -->
    <div class="header-filters">
       <h2 class="products-section-header">Best Selling Items</h2>
@@ -46,8 +46,14 @@
             <div class="price">
                {% if product.original_price %} {% endif %}
                <span class="original-price">${{ product.discount_price }}</span>
-               <span class="sold"> <i class="fa fa-thumbs-up"></i> {{ product.sold[period] }} sold </span>
-               <button class="cart-btn">🛒</button>
+               <span class="sold">
+                  <i class="fa fa-thumbs-up"></i> {{ product.sold[period] }}
+                  sold
+               </span>
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i> </a
+               ></button>
             </div>
 
             <div class="product-rating"

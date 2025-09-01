@@ -1,7 +1,7 @@
-.container {
+.bestselling-container {
   width: minmax(90%, 1440px);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 80px 20px;
 }
 
 /* Header + filters */

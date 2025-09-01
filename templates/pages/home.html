@@ -60,7 +60,10 @@
                </span>
 
                <!-- Cart Icon -->
-               <button class="cart-btn">🛒</button>
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i> </a
+               ></button>
             </div>
 
             <!-- Rating -->
@@ -114,7 +117,10 @@
                </span>
 
                <!-- Cart Icon -->
-               <button class="cart-btn">🛒</button>
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i> </a
+               ></button>
             </div>
 
             <!-- Rating -->
