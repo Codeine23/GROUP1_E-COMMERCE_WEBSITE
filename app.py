@@ -6,6 +6,7 @@ from functools import wraps
 from dotenv import load_dotenv 
 from data.dummy_data import products
 from utils.cart import add_to_cart, remove_from_cart, get_cart_items
+from utils.products import get_product
 
 
 load_dotenv()
@@ -86,6 +87,16 @@ def best_selling():
         products=sorted_products,
         period=period
     )
+
+@app.route("/product/<int:product_id>")
+def product_detail(product_id):
+    product = get_product(product_id)
+    
+    if not product:
+        flash("Product not found.", "danger")
+        return redirect(url_for("home"))
+    
+    return render_template("pages/product_detail.html", product=product)
 
 
 @app.route("/cart")

@@ -8,7 +8,8 @@ products = [
         "rating": 4.5,
         "reviews": 220,
         "tags": ["electronics", "featured", "best_seller"],
-        "sold": {"last7": 25, "last14": 50, "last30": 140}
+        "sold": {"last7": 25, "last14": 50, "last30": 140},
+        "description": "Experience immersive sound with our wireless headphones, featuring noise cancellation, long battery life, and ergonomic comfort. Perfect for music lovers, gamers, or professionals needing reliable performance wherever they go."
     },
     {
         "id": 2,
@@ -19,7 +20,8 @@ products = [
         "rating": 4.8,
         "reviews": 540,
         "tags": ["electronics", "featured"],
-        "sold": {"last7": 45, "last14": 90, "last30": 260}
+        "sold": {"last7": 45, "last14": 90, "last30": 260},
+        "description": "The Smartphone Pro X delivers cutting-edge performance with a powerful processor, high-resolution camera, vibrant display, and durable design. Ideal for multitasking, gaming, streaming, or staying connected with friends and family."
     },
     {
         "id": 3,
@@ -30,7 +32,8 @@ products = [
         "rating": 4.7,
         "reviews": 310,
         "tags": ["electronics", "best_seller"],
-        "sold": {"last7": 15, "last14": 35, "last30": 100}
+        "sold": {"last7": 15, "last14": 35, "last30": 100},
+        "description": "Unleash your gaming potential with this high-performance laptop, featuring advanced graphics, rapid processing speeds, and efficient cooling. Built for gamers who demand smooth performance, multitasking capability, and exceptional visual detail."
     },
     {
         "id": 4,
@@ -41,7 +44,8 @@ products = [
         "rating": 4.2,
         "reviews": 190,
         "tags": ["wearables", "featured"],
-        "sold": {"last7": 12, "last14": 28, "last30": 75}
+        "sold": {"last7": 12, "last14": 28, "last30": 75},
+        "description": "Track your health, fitness, and notifications on the go with the Smartwatch Gen 5. Featuring stylish design, accurate sensors, and long-lasting battery life, it’s your all-day smart companion."
     },
     {
         "id": 5,
@@ -52,7 +56,8 @@ products = [
         "rating": 4.6,
         "reviews": 400,
         "tags": ["home_appliance", "featured", "best_seller"],
-        "sold": {"last7": 20, "last14": 55, "last30": 160}
+        "sold": {"last7": 20, "last14": 55, "last30": 160},
+        "description": "Enjoy cinematic visuals at home with this 4K LED TV. Featuring sharp resolution, smart connectivity, vibrant colors, and energy-efficient performance, it’s designed for family movie nights and entertainment."
     },
     {
         "id": 6,
@@ -63,7 +68,8 @@ products = [
         "rating": 4.4,
         "reviews": 320,
         "tags": ["electronics", "best_seller"],
-        "sold": {"last7": 30, "last14": 65, "last30": 180}
+        "sold": {"last7": 30, "last14": 65, "last30": 180},
+        "description": "Compact yet powerful, this Bluetooth speaker delivers rich sound with deep bass. Perfect for parties, outdoor trips, or personal use. Wireless freedom ensures easy portability without compromising audio quality."
     },
     {
         "id": 7,
@@ -74,7 +80,8 @@ products = [
         "rating": 4.7,
         "reviews": 210,
         "tags": ["electronics", "featured"],
-        "sold": {"last7": 18, "last14": 40, "last30": 120}
+        "sold": {"last7": 18, "last14": 40, "last30": 120},
+        "description": "Capture memories in stunning clarity with this professional-grade DSLR camera. Featuring interchangeable lenses, advanced controls, and fast autofocus, it’s perfect for beginners and experienced photographers alike."
     },
     {
         "id": 8,
@@ -85,7 +92,8 @@ products = [
         "rating": 4.3,
         "reviews": 180,
         "tags": ["fashion", "best_seller"],
-        "sold": {"last7": 35, "last14": 70, "last30": 200}
+        "sold": {"last7": 35, "last14": 70, "last30": 200},
+        "description": "Engineered for comfort and durability, these running shoes feature breathable material, cushioned soles, and lightweight design. Ideal for athletes, casual joggers, or everyday wear with unmatched support."
     },
     {
         "id": 9,
@@ -96,7 +104,8 @@ products = [
         "rating": 4.1,
         "reviews": 150,
         "tags": ["fashion", "featured"],
-        "sold": {"last7": 10, "last14": 22, "last30": 60}
+        "sold": {"last7": 10, "last14": 22, "last30": 60},
+        "description": "Stylish and functional, this leather backpack offers spacious compartments, premium craftsmanship, and a timeless look. Perfect for students, professionals, or travelers needing reliability and fashion combined."
     },
     {
         "id": 10,
@@ -107,7 +116,8 @@ products = [
         "rating": 4.0,
         "reviews": 110,
         "tags": ["fashion", "featured"],
-        "sold": {"last7": 8, "last14": 20, "last30": 50}
+        "sold": {"last7": 8, "last14": 20, "last30": 50},
+        "description": "Protect your eyes in style with these classic sunglasses. Offering UV protection, lightweight comfort, and timeless design, they are perfect for everyday wear or sunny outdoor adventures."
     },
     {
         "id": 11,
@@ -118,7 +128,8 @@ products = [
         "rating": 4.5,
         "reviews": 230,
         "tags": ["home_appliance", "best_seller"],
-        "sold": {"last7": 22, "last14": 48, "last30": 130}
+        "sold": {"last7": 22, "last14": 48, "last30": 130},
+        "description": "Cook, reheat, and defrost with ease using this microwave oven. Featuring multiple cooking modes, energy efficiency, and sleek design, it’s perfect for busy kitchens and families on the go."
     },
     {
         "id": 12,
@@ -129,7 +140,8 @@ products = [
         "rating": 4.3,
         "reviews": 175,
         "tags": ["home_appliance", "featured"],
-        "sold": {"last7": 14, "last14": 32, "last30": 95}
+        "sold": {"last7": 14, "last14": 32, "last30": 95},
+        "description": "Beat the heat with this powerful and energy-efficient air conditioner. Designed for quick cooling, quiet operation, and long-lasting durability, it ensures comfort during hot summer days and nights."
     },
     {
         "id": 13,
@@ -140,7 +152,8 @@ products = [
         "rating": 4.2,
         "reviews": 95,
         "tags": ["home_appliance", "best_seller"],
-        "sold": {"last7": 16, "last14": 38, "last30": 110}
+        "sold": {"last7": 16, "last14": 38, "last30": 110},
+        "description": "Brew your favorite coffee effortlessly with this easy-to-use coffee maker. Compact yet powerful, it offers consistent flavor, quick brewing, and stylish design perfect for home or office use."
     },
     {
         "id": 14,
@@ -151,7 +164,8 @@ products = [
         "rating": 4.1,
         "reviews": 80,
         "tags": ["fitness", "featured"],
-        "sold": {"last7": 28, "last14": 60, "last30": 150}
+        "sold": {"last7": 28, "last14": 60, "last30": 150},
+        "description": "Enhance your workouts with this non-slip yoga mat, offering comfort, durability, and portability. Perfect for yoga, pilates, stretching, or meditation, it provides reliable support during every session."
     },
     {
         "id": 15,
@@ -162,7 +176,8 @@ products = [
         "rating": 4.4,
         "reviews": 135,
         "tags": ["fitness", "best_seller"],
-        "sold": {"last7": 20, "last14": 46, "last30": 125}
+        "sold": {"last7": 20, "last14": 46, "last30": 125},
+        "description": "Build strength and tone muscles with this versatile dumbbell set. Featuring durable material, ergonomic design, and adjustable weight options, it’s ideal for home workouts and fitness enthusiasts alike."
     },
     {
         "id": 16,
@@ -173,7 +188,8 @@ products = [
         "rating": 4.3,
         "reviews": 160,
         "tags": ["furniture", "featured"],
-        "sold": {"last7": 11, "last14": 26, "last30": 70}
+        "sold": {"last7": 11, "last14": 26, "last30": 70},
+        "description": "Stay comfortable throughout your workday with this ergonomic office chair. Featuring adjustable height, lumbar support, and breathable material, it’s designed to improve posture and enhance productivity at home or office."
     },
     {
         "id": 17,
@@ -184,7 +200,8 @@ products = [
         "rating": 4.6,
         "reviews": 210,
         "tags": ["furniture", "best_seller"],
-        "sold": {"last7": 13, "last14": 30, "last30": 85}
+        "sold": {"last7": 13, "last14": 30, "last30": 85},
+        "description": "This premium wooden desk combines elegant craftsmanship with functionality. With spacious surface, sturdy construction, and modern design, it’s perfect for work, study, or adding sophistication to your room."
     },
     {
         "id": 18,
@@ -195,7 +212,8 @@ products = [
         "rating": 4.2,
         "reviews": 95,
         "tags": ["furniture", "featured"],
-        "sold": {"last7": 9, "last14": 18, "last30": 45}
+        "sold": {"last7": 9, "last14": 18, "last30": 45},
+        "description": "Brighten your space with this stylish table lamp. Designed with a sleek base and warm lighting, it’s perfect for bedrooms, study areas, or enhancing cozy ambiance in any room."
     },
     {
         "id": 19,
@@ -206,7 +224,8 @@ products = [
         "rating": 4.0,
         "reviews": 65,
         "tags": ["fashion", "best_seller"],
-        "sold": {"last7": 12, "last14": 25, "last30": 65}
+        "sold": {"last7": 12, "last14": 25, "last30": 65},
+        "description": "Look sharp and feel comfortable with this classic men’s shirt. Made with breathable fabric, modern fit, and versatile design, it’s suitable for casual outings, work, or semi-formal events."
     },
     {
         "id": 20,
@@ -217,6 +236,7 @@ products = [
         "rating": 4.5,
         "reviews": 140,
         "tags": ["fashion", "featured", "best_seller"],
-        "sold": {"last7": 19, "last14": 42, "last30": 115}
+        "sold": {"last7": 19, "last14": 42, "last30": 115},
+        "description": "Indulge in luxury with Perfume Deluxe, offering a long-lasting fragrance that combines elegance and freshness. Perfect for daily wear or special occasions, it leaves a memorable impression everywhere you go."
     }
 ]
