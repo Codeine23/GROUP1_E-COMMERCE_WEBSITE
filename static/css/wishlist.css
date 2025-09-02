@@ -1,0 +1,38 @@
+/* mine */
+.items{
+     max-width: 1200px;
+     margin: 40px auto;
+     margin-left: 20px;
+     text-align: center;
+}
+.item-grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+.item img{
+    width: 100%;
+    height: 200px;
+}
+.item button{
+    width: 300px;
+    padding: 10px;
+    background-color: #1e6ec9;
+    color: white;
+    border: 1px solid #ffffff;
+    font-size: 18px;
+    margin-top: 0px;
+}
+.items h2{
+    text-align: left;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.item h3{
+    text-align: left;
+    font-weight: lighter;
+}
+.item p{
+    text-align: left;
+    font-weight: bold;
+}
