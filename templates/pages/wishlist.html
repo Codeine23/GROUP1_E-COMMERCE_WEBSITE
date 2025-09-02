@@ -1,42 +1,47 @@
- {% extends "layouts/base.html"%} {% block content %}
-<section class="items">
-            <h2>Wishlist(4)</h2>
-            <div class="item-grid">
-                <div class="item">
-                    <img src="\static\images\products\shoes.png"
-                    alt="shoes">
-                    <button class="ctr">🛒 Add to cart</button>
-                    <h3>Unisex casual sneakers</h3>
-                    <p>24,000.00</p>
+{% extends "layouts/base.html" %} {% block content %}
+<div class="wishlist-container">
+   {% if not wishlist %}
+   <div class="empty-wishlist">
+      <p>Your wishlist is empty.</p>
+   </div>
+   {% else %}
+   <h2 class="products-section-header">Wishlist ({{ wishlist|length }})</h2>
 
-                </div>
-                <div class="item">
-                    <img src="\static\images\products\smartphone.jpeg"
-                    alt="smartphone">
-                    <button class="ctr">🛒 Add to cart</button>
-                    <h3>smartphone</h3>
-                    <p>104,000.00</p>
+   <div class="wishlist-grid">
+      {% for item in wishlist %}
+      <div class="wishlist-card">
+         <img
+            src="{{ item.image }}"
+            alt="{{ item.name }}" />
+         <div class="wishlist-info">
+            <h3 class="wishlist-name">{{ item.name }}</h3>
+            <p class="wishlist-price">₦{{ item.discount_price }}</p>
+            <p class="wishlist-meta">{{ item.sold.last30 }} sold</p>
+         </div>
 
-                </div>
-                <div class="item">
-                    <img src="\static\images\products\shirt.png"
-                    alt="shirt">
-                    <button class="ctr">🛒 Add to cart</button>
-                    <h3>T-shirt</h3>
-                    <p>8,000.00</p>
-
-                </div>
-                <div class="item">
-                    <img src="\static\images\products\sunglasses.webp"
-                    alt="sunglasses">
-                    <button class="ctr">🛒 Add to cart</button>
-                    <h3>Sunglasses</h3>
-                    <p>5,000.00</p>
-
-                </div>
-
+         <div class="wishlist-actions">
+            <div class="wishlist-actions">
+               <form action="{{ url_for('add', product_id=item.id) }}">
+                  <button
+                     type="submit"
+                     class="btn add-btn"
+                     >Add to Cart</button
+                  >
+               </form>
+               <form
+                method="POST"
+                  action="{{ url_for('remove_from_wishlist', product_id=item.id) }}">
+                  <button
+                     type="submit"
+                     class="btn delete-btn"
+                     >Remove</button
+                  >
+               </form>
             </div>
-    </section>
-
-
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+   {% endif %}
+</div>
 {% endblock %}

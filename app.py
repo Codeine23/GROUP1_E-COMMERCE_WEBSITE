@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from dotenv import load_dotenv 
 from data.dummy_data import products
+from utils.wishlist import add_to_wishlist_helper, remove_from_wishlist_helper, get_wishlist_items
 from utils.cart import add_to_cart, remove_from_cart, get_cart_items
 from utils.products import get_product
 
@@ -33,8 +34,10 @@ def inject_user():
     return dict(
         username=session.get("username"),
         is_admin=session.get("role") == "admin",
-        cart=session.get("cart", {})
+        cart=session.get("cart", {}),
+        wishlist=session.get("wishlist", {})
     )
+
 # -------- DATABASE CONNECTION --------
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
@@ -70,7 +73,27 @@ def home():
         best_sellers=best_sellers
     )
 
-@app.route("/categories/")
+@app.route("/categories")
+def categories():
+    # get unique categories from your products dummy data
+    categories = list({tag for p in products for tag in p.get("tags", [])})
+
+    # get query param for category
+    selected_category = request.args.get("category", "featured")
+
+    if selected_category == "featured":
+        filtered_products = [p for p in products if "featured" in p.get("tags", [])]
+    else:
+        filtered_products = [p for p in products if selected_category in p.get("tags", [])]
+
+    return render_template(
+        "pages/categories.html",
+        categories=categories,
+        products=filtered_products,
+        selected_category=selected_category
+    )
+
+
 
 @app.route("/best-selling")
 def best_selling():
@@ -191,6 +214,31 @@ def checkout():
         total=total
         )
 
+@app.route("/wishlist")
+@login_required
+def wishlist():
+    wishlist = get_wishlist_items()
+    return render_template(
+        "pages/wishlist.html",
+        wishlist=wishlist
+    )
+
+
+@app.route("/wishlist/add/<int:product_id>", methods=["POST"])
+@login_required
+def add_to_wishlist(product_id):
+    add_to_wishlist_helper(product_id)
+    flash("Item added to your wishlist", "success")
+    return redirect(request.referrer or url_for("wishlist"))
+
+@app.route("/wishlist/remove/<int:product_id>", methods=["POST"])
+@login_required
+def remove_from_wishlist(product_id):
+    remove_from_wishlist_helper(product_id)  # from wishlist.py
+    flash("Item removed from wishlist", "info")
+    return redirect(request.referrer or url_for("wishlist"))
+
+
 @app.route("/contact-us")
 def contact():
     return render_template("pages/contact_us.html")
@@ -210,11 +258,6 @@ def last_days():
 @app.route("/shoes")
 def shoes():
     return render_template("pages/shoes.html")
-
-@app.route("/wishlist")
-@login_required
-def wishlist():
-    return render_template("pages/wishlist.html")
 
 @app.route("/men_clothings")
 def men():

@@ -1,5 +1,4 @@
-{% extends "layouts/base.html" %}
-{% block content %}
+{% extends "layouts/base.html" %} {% block content %}
 <div class="product-page">
    <!-- Breadcrumbs -->
    <nav class="breadcrumbs">
@@ -11,7 +10,9 @@
    <div class="product-main-grid">
       <!-- Left: Image -->
       <div class="product-detail-image">
-         <img src="{{ product.image }}" alt="{{ product.name }}" />
+         <img
+            src="{{ product.image }}"
+            alt="{{ product.name }}" />
       </div>
 
       <!-- Right: Info -->
@@ -22,13 +23,11 @@
          <!-- Ratings & stock -->
          <div class="ratings-stock">
             <div class="product-rating">
-               {% for i in range(1, 6) %}
-                  {% if i <= product.rating %}
-                     <i class="fas fa-star filled"></i>
-                  {% else %}
-                     <i class="fas fa-star empty"></i>
-                  {% endif %}
-               {% endfor %}
+               {% for i in range(1, 6) %} {% if i <= product.rating %}
+               <i class="fas fa-star filled"></i>
+               {% else %}
+               <i class="fas fa-star empty"></i>
+               {% endif %} {% endfor %}
                <span class="reviews">({{ product.reviews }})</span>
             </div>
          </div>
@@ -62,9 +61,16 @@
 
          <!-- Quantity & buttons -->
          <div class="purchase-box">
-            <form action="{{ url_for('update_cart', product_id=product.id) }}" method="POST" id="quantity-form">
+            <form
+               action="{{ url_for('update_cart', product_id=product.id) }}"
+               method="POST"
+               id="quantity-form">
                <div class="quantity">
-                  <button type="button" class="qty-btn left"><i class="fas fa-minus"></i></button>
+                  <button
+                     type="button"
+                     class="qty-btn left"
+                     ><i class="fas fa-minus"></i
+                  ></button>
                   <input
                      name="quantity"
                      id="quantity-input"
@@ -72,14 +78,32 @@
                      value="1"
                      min="1"
                      class="qty-input" />
-                  <button type="button" class="qty-btn right"><i class="fas fa-plus"></i></button>
+                  <button
+                     type="button"
+                     class="qty-btn right"
+                     ><i class="fas fa-plus"></i
+                  ></button>
                </div>
             </form>
 
             <button class="buy-btn">
                <a href="{{ url_for('add', product_id=product.id) }}">Buy Now</a>
             </button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+            <form
+               method="POST"
+               action="{% if product.id|string in wishlist %}{{ url_for('remove_from_wishlist', product_id=product.id) }}{% else %}{{ url_for('add_to_wishlist', product_id=product.id) }}{% endif %}">
+               <button
+                  type="submit"
+                  class="wishlist-btn">
+                  {% if product.id|string in wishlist %}
+                  <i
+                     class="fas fa-heart"
+                     style="color: red"></i>
+                  {% else %}
+                  <i class="far fa-heart"></i>
+                  {% endif %}
+               </button>
+            </form>
          </div>
 
          <!-- Delivery / return info -->
@@ -106,44 +130,49 @@
    <section class="related-products">
       <h2>Related Items</h2>
       <div class="related-grid">
-         {% if related_products %}
-            {% for related in related_products %}
-               <div class="product-card">
-                  <a href="{{ url_for('product_detail', product_id=related.id) }}">
-                     <div class="product-image-wrapper">
-                        <img src="{{ related.image }}" alt="{{ related.name }}" />
-                        <span class="discount-badge">
-                           -{{ ((1 - (related.discount_price / related.original_price)) * 100) | round(0) }}%
-                        </span>
-                     </div>
-                  </a>
-
-                  <div class="product-info">
-                     <a href="{{ url_for('product_detail', product_id=related.id) }}">
-                        <h3 class="product-name">{{ related.name }}</h3>
-                     </a>
-
-                     <div class="product-meta">
-                        <span class="tag">{{ related.tags.0 }}</span>
-                        <span class="price">
-                           <span class="discount-price">${{ related.discount_price }}</span>
-                           <span class="original-price">${{ related.original_price }}</span>
-                        </span>
-                        <button class="cart-btn">
-                           <a href="{{ url_for('add', product_id=related.id) }}">
-                              <i class="fas fa-cart-plus"></i>
-                           </a>
-                        </button>
-                     </div>
-
-                     <div class="product-rating">
-                        ⭐ {{ related.rating }} ({{ related.reviews }} reviews)
-                     </div>
-                  </div>
+         {% if related_products %} {% for related in related_products %}
+         <div class="product-card">
+            <a href="{{ url_for('product_detail', product_id=related.id) }}">
+               <div class="product-image-wrapper">
+                  <img
+                     src="{{ related.image }}"
+                     alt="{{ related.name }}" />
+                  <span class="discount-badge">
+                     -{{ ((1 - (related.discount_price /
+                     related.original_price)) * 100) | round(0) }}%
+                  </span>
                </div>
-            {% endfor %}
-         {% else %}
-            <p>No related items found.</p>
+            </a>
+
+            <div class="product-info">
+               <a href="{{ url_for('product_detail', product_id=related.id) }}">
+                  <h3 class="product-name">{{ related.name }}</h3>
+               </a>
+
+               <div class="product-meta">
+                  <span class="tag">{{ related.tags.0 }}</span>
+                  <span class="price">
+                     <span class="discount-price"
+                        >${{ related.discount_price }}</span
+                     >
+                     <span class="original-price"
+                        >${{ related.original_price }}</span
+                     >
+                  </span>
+                  <button class="cart-btn">
+                     <a href="{{ url_for('add', product_id=related.id) }}">
+                        <i class="fas fa-cart-plus"></i>
+                     </a>
+                  </button>
+               </div>
+
+               <div class="product-rating">
+                  ⭐ {{ related.rating }} ({{ related.reviews }} reviews)
+               </div>
+            </div>
+         </div>
+         {% endfor %} {% else %}
+         <p>No related items found.</p>
          {% endif %}
       </div>
    </section>

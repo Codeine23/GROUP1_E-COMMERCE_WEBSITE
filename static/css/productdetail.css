@@ -200,6 +200,22 @@
    gap: 1rem;
 }
 
+.wishlist-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.wishlist-btn i {
+  transition: color 0.2s ease;
+}
+
+.wishlist-btn i:hover {
+  color: #d32f2f;
+}
+
+
 @media (max-width: 900px) {
     .product-main-grid {
    grid-template-columns: 1fr;
