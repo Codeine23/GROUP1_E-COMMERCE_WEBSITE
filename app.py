@@ -35,7 +35,6 @@ def inject_user():
         is_admin=session.get("role") == "admin",
         cart=session.get("cart", {})
     )
-
 # -------- DATABASE CONNECTION --------
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
@@ -53,6 +52,7 @@ with get_db_connection() as conn:
     """)
     conn.commit()
 
+ 
 
 # -------- ROUTES --------
 @app.route("/")
@@ -69,6 +69,8 @@ def home():
         featured=featured,
         best_sellers=best_sellers
     )
+
+@app.route("/categories/")
 
 @app.route("/best-selling")
 def best_selling():
@@ -96,7 +98,21 @@ def product_detail(product_id):
         flash("Product not found.", "danger")
         return redirect(url_for("home"))
     
-    return render_template("pages/product_detail.html", product=product)
+    related_products = []
+    if product.get("tags"):
+        main_tag = product["tags"][0] #only the first tag
+
+        for p in products:
+            if p["id"] != product["id"] and p.get("tags") and main_tag in p["tags"]:
+                related_products.append(p)
+
+    related_products = related_products[:4]
+
+    return render_template(
+        "pages/product_detail.html",
+         product=product,
+         related_products=related_products
+         )
 
 
 @app.route("/cart")
@@ -140,6 +156,25 @@ def update_cart(product_id):
         cart.pop(product_id, None)
     session["cart"] = cart
     return redirect(url_for("cart"))
+
+@app.route('/remove_from_cart/<product_id>', methods=["POST"])
+def remove_from_cart(product_id):
+    cart = session.get("cart", {})
+    product_id = str(product_id)
+
+    if product_id in cart:
+        del cart[product_id]
+    session["cart"] = cart
+
+    return redirect(url_for("cart"))
+
+
+@app.route("/update_quantity/<int:product_id>", methods=["POST"])
+def update_quantity_route(product_id):
+    quantity = int(request.form.get("quantity", 1))
+    update_quantity(product_id, quantity)
+    return jsonify(success=True, cart=session.get("cart", {}))
+
 
 @app.route("/checkout")
 @login_required
@@ -195,7 +230,7 @@ def search():
     return f"Search results for: {query}"
 
 
-#------------ AUTHENTICATION ------------
+#------------ AUTH ------------
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -253,8 +288,8 @@ def register():
 
         conn = get_db_connection()
         try:
-            conn.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-                         (username, email, hashed_password))
+            conn.execute('INSERT INTO users (email, username, password) VALUES (?, ?, ?)',
+                         (email, username, hashed_password))
             conn.commit()
             flash('Registration successful! Please log in.', 'success')
             return redirect(url_for('login'))
@@ -332,6 +367,8 @@ def add_product():
 @app.route("/admin/manage_users")
 def manage_users():
     return render_template("admin/manage_users.html")
+
+
 
 
 

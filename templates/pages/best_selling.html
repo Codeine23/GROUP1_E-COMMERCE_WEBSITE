@@ -27,16 +27,20 @@
       {% for product in products %}
       <div class="product-card">
          <div class="product-image-wrapper">
-            <img
-               src="{{ product.image }}"
-               alt="{{ product.name }}" />
-            {% if product.discount %}
-            <span class="discount-badge">{{ product.discount }}% OFF</span>
-            {% endif %}
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <img
+                  src="{{ product.image }}"
+                  alt="{{ product.name }}" />
+               {% if product.discount %}
+               <span class="discount-badge">{{ product.discount }}% OFF</span>
+               {% endif %}
+            </a>
          </div>
 
          <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <h3 class="product-name">{{ product.name }}</h3>
+            </a>
             <div class="product-meta">
                {% for tag in product.tags %}
                <span class="tag">{{ tag }}</span>

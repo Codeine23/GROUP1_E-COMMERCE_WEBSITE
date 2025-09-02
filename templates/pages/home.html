@@ -28,10 +28,11 @@
       <div class="product-card">
          <!-- Image Wrapper -->
          <div class="product-image-wrapper">
-            <img
-               src="{{ product.image }}"
-               alt="{{ product.name }}" />
-
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <img
+                  src="{{ product.image }}"
+                  alt="{{ product.name }}" />
+            </a>
             <!-- Discount Blob -->
             <span class="discount-badge">
                -{{ ((1 - (product.discount_price / product.original_price)) *
@@ -42,7 +43,9 @@
          <!-- Meta Content -->
          <div class="product-info">
             <!-- Product Name -->
-            <h3 class="product-name">{{ product.name }}</h3>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <h3 class="product-name">{{ product.name }}</h3>
+            </a>
 
             <!-- Tags + Prices + Cart -->
             <div class="product-meta">
@@ -85,10 +88,11 @@
       <div class="product-card">
          <!-- Image Wrapper -->
          <div class="product-image-wrapper">
-            <img
-               src="{{ product.image }}"
-               alt="{{ product.name }}" />
-
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <img
+                  src="{{ product.image }}"
+                  alt="{{ product.name }}" />
+            </a>
             <!-- Discount Blob -->
             <span class="discount-badge">
                -{{ ((1 - (product.discount_price / product.original_price)) *
@@ -98,8 +102,10 @@
 
          <!-- Meta Content -->
          <div class="product-info">
-            <!-- Product Name -->
-            <h3 class="product-name">{{ product.name }}</h3>
+            <a href="{{ url_for('product_detail', product_id=product.id) }}">
+               <!-- Product Name -->
+               <h3 class="product-name">{{ product.name }}</h3>
+            </a>
 
             <!-- Tags + Prices + Cart -->
             <div class="product-meta">
@@ -134,7 +140,7 @@
    </div>
    <div class="see-more">
       <a
-         href="/bestselling"
+         href="/best-selling"
          class="btn"
          >See More</a
       >
