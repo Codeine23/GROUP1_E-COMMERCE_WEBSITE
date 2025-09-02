@@ -1,0 +1,34 @@
+.order-confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 2rem;
+}
+.confirmation-card {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.confirmation-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.confirmation-card p {
+    margin: 0.5rem 0;
+}
+.cta-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.cta-btn:hover {
+    background: #0056b3;
+}

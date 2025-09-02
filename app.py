@@ -199,13 +199,23 @@ def update_quantity_route(product_id):
     return jsonify(success=True, cart=session.get("cart", {}))
 
 
-@app.route("/checkout")
+@app.route("/checkout", methods=["GET", "POST"])
 @login_required
 def checkout():
     cart_items_with_details, subtotal = get_cart_items()
     shipping = 5 if subtotal > 0 else 0
 
     total = subtotal + shipping
+
+    if request.method == "POST":
+        #This is where the logic for save to DB would or should be at
+        #so we will redirect to confirmation page
+
+        session["cart"] = {}
+        flash("Your order has been placed!", "success")
+        return redirect(url_for("order_confirmation"))
+
+
     return render_template(
         "pages/checkout.html",
         cart_items=cart_items_with_details,
@@ -213,6 +223,12 @@ def checkout():
         subtotal=subtotal,
         total=total
         )
+
+@app.route("/order-confirmation")
+@login_required
+def order_confirmation():
+    return render_template("pages/order_confirmation.html")
+
 
 @app.route("/wishlist")
 @login_required

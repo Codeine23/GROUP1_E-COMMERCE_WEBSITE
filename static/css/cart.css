@@ -130,6 +130,10 @@
    background: #0056b3;
 }
 
+.checkout-btn:disabled {
+   background-color: silver;
+}
+
 @media (max-width: 768px) {
    .cart-grid {
       grid-template-columns: 1fr;
