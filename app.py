@@ -195,7 +195,7 @@ def search():
     return f"Search results for: {query}"
 
 
-#------------ AUTH ------------
+#------------ AUTHENTICATION ------------
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -253,8 +253,8 @@ def register():
 
         conn = get_db_connection()
         try:
-            conn.execute('INSERT INTO users (email, username, password) VALUES (?, ?, ?)',
-                         (email, username, hashed_password))
+            conn.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+                         (username, email, hashed_password))
             conn.commit()
             flash('Registration successful! Please log in.', 'success')
             return redirect(url_for('login'))
