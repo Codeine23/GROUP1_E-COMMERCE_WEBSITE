@@ -372,10 +372,18 @@ def login():
         conn.close()
 
         if user and check_password_hash(user["password"], password):
+            guest_cart = session.get("cart", {})
+            guest_wishlist = session.get("wishlist", {})
+
             session.clear()
             session["user_id"] = user["id"]
             session["username"] = user["username"]
             session["is_admin"] = False
+
+            if guest_cart:
+                session["cart"] = guest_cart
+            if guest_wishlist:
+                session["wishlist"] = guest_wishlist
             flash("Login successful!", "success")
             return redirect(url_for("home"))
 
