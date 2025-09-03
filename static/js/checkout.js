@@ -9,7 +9,7 @@ function checkForm() {
         if (!input.value.trim()) allFilled = false;
     });
 
-    button.disabled = !allFilled;
+    //button.disabled = !allFilled;
 }
 
 form.addEventListener("input", checkForm);
