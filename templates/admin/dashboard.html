@@ -1,5 +1,7 @@
+{% extends "layouts/base.html" %}{%  block content%}
+<div style="padding: 72px 24px 24px; max-width: 1100px; margin: 0 auto;">
 <h1>Admin Dashboard - Users</h1>
-<table border="1" cellpadding="5">
+<table border="1" cellpadding="5" cellspacing="0" margin-top="50px" margin-left="20px" >
     <tr>
         <th>ID</th>
         <th>Username</th>
@@ -22,3 +24,5 @@
     </tr>
     {% endfor %}
 </table>
+</div>
+{%endblock%}
