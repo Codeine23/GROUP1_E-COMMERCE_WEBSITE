@@ -9,6 +9,7 @@ from utils.wishlist import add_to_wishlist_helper, remove_from_wishlist_helper, 
 from utils.cart import add_to_cart, remove_from_cart, get_cart_items, update_quantity
 from utils.products import get_product
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -44,6 +45,7 @@ def get_db_connection():
     return conn
 
 with get_db_connection() as conn:
+    # Create users table
     conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,37 +54,27 @@ with get_db_connection() as conn:
             password TEXT NOT NULL
         )
     """)
+
+    # Create orders table
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            address TEXT NOT NULL,
+            city TEXT NOT NULL,
+            state TEXT NOT NULL,
+            zipcode TEXT NOT NULL,
+            total_amount REAL NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
     conn.commit()
 
-def insert_order(order_data):
-    try:
-        conn = sqlite3.connect('orders.db')
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO orders (first_name, last_name, email, phone, company, address, apartment, country, city, state, postcode, notes)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?);
-        ''', (
-            order_data['first_name'],
-            order_data['last_name'],
-            order_data['email'],
-            order_data['phone'],
-            order_data['company'],
-            order_data['address'],
-            order_data['apartment'],
-            order_data['country'],
-            order_data['city'],
-            order_data['state'],
-            order_data['postcode'],
-            #order_data['total_amount'],
-            order_data['notes']
-        ))
-        conn.commit()
-        conn.close()
-        return True
-    except sqlite3.Error as e:
-        print(f"Database error: {e}")
-        return False
 
+ 
 
 # -------- ROUTES --------
 @app.route("/")
@@ -231,51 +223,68 @@ def update_quantity_route(product_id):
 def checkout():
     cart_items_with_details, subtotal = get_cart_items()
     shipping = 5 if subtotal > 0 else 0
-
     total = subtotal + shipping
 
     if request.method == "POST":
-        if request.method == 'POST':
-        # Get data from the submitted form
-            order_data = {
-            'first_name': request.form.get('first_name'),
-            'last_name': request.form.get('last_name'),
-            'email': request.form.get('email'),
-            'phone': request.form.get('phone'),
-            'company': request.form.get('company'),
-            'address': request.form.get('address'),
-            'apartment': request.form.get('apartment'),
-            'city': request.form.get('city'),
-            'country': request.get('country'),
-            'state': request.form.get('state'),
-            'postcode': request.form.get('zipcode'),
-            'notes': request.form.get('notes')
-            #'total_amount': 1883.00  # Calculated dynamically in a real app
-        }
+        # ✅ Extract form data
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        email = request.form.get("email")
+        address = request.form.get("address")
+        city = request.form.get("city")
+        state = request.form.get("state")
+        zipcode = request.form.get("postcode")
+        payment_method = request.form.get("payment")  # <-- must exist in your form
 
-        """if insert_order(order_data):
-            flash ("Order placed successfully! Thank you.", "success")
-        else:
-            flash ("An error occurred while placing your order.", "danger")"""
+        # ✅ Save order into DB
+        with get_db_connection() as conn:
+            conn.execute(
+                """
+                INSERT INTO orders (
+                    first_name, last_name, email, address, city, state, zipcode, total_amount
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (first_name, last_name, email, address, city, state, zipcode, total),
+            )
+            conn.commit()
 
+        # ✅ Clear cart after saving
         session["cart"] = {}
-        flash("Your order has been placed!", "success")
-        return redirect(url_for("order_confirmation"))
 
+        # ✅ handle redirection depending on payment
+        if payment_method == "pod":
+            # Pay on Delivery → go straight to confirmation page
+            flash("Order placed successfully! Pay on Delivery selected.", "success")
+            return redirect(url_for("order_confirmation"))
+        else:
+            # Bank Payment → fake gateway simulation page
+            return redirect(url_for("pay_gateway"))
 
     return render_template(
         "pages/checkout.html",
         cart_items=cart_items_with_details,
         shipping=shipping,
         subtotal=subtotal,
-        total=total
-        )
+        total=total,
+    )
+
 
 @app.route("/order-confirmation")
 @login_required
 def order_confirmation():
     return render_template("pages/order_confirmation.html")
 
+@app.route("/pay-gateway", methods=["GET", "POST"])
+def pay_gateway():
+    if request.method == "POST":
+        # fake verification logic
+        card_number = request.form.get("card_number")
+        if card_number and card_number.startswith("4"):  # e.g., "Visa starts with 4"
+            flash("Payment successful!", "success")
+            return redirect(url_for("order_confirmation"))
+        else:
+            flash("Payment failed! Try again.", "danger")
+    return render_template("pages/pay_gateway.html")
 
 @app.route("/wishlist")
 @login_required
