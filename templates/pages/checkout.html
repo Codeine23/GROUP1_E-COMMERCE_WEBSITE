@@ -28,7 +28,7 @@
             <div class="checkout-form-row">
                <div class="checkout-form-group full-width">
                   <label>Country</label>
-                  <select>
+                  <select name="country">
                      <option>Nigeria</option>
                      <option>United States</option>
                      <option>United Kingdom</option>
@@ -43,14 +43,16 @@
                   <input
                      required
                      type="text"
-                     placeholder="First Name" />
+                     placeholder="First Name"
+                     name="first_name" />
                </div>
                <div class="checkout-form-group">
                   <label>Last Name</label>
                   <input
                      required
                      type="text"
-                     placeholder="Last Name" />
+                     placeholder="Last Name"
+                     name="last_name" />
                </div>
             </div>
 
@@ -60,7 +62,8 @@
                <input
                   required
                   type="text"
-                  placeholder="Company Name" />
+                  placeholder="Company Name"
+                  name="company" />
             </div>
 
             <!-- Address -->
@@ -69,11 +72,13 @@
                <input
                   required
                   type="text"
-                  placeholder="Street Address" />
+                  placeholder="Street Address"
+                  name="address" />
                <input
                   required
                   type="text"
                   placeholder="Apartment, suite, unit, etc. (optional)"
+                  name="apartment"
                   style="margin-top: 8px" />
             </div>
 
@@ -83,7 +88,8 @@
                <input
                   required
                   type="text"
-                  placeholder="City" />
+                  placeholder="City"
+                  name="city" />
             </div>
 
             <!-- State + Postcode -->
@@ -93,14 +99,16 @@
                   <input
                      required
                      type="text"
-                     placeholder="State" />
+                     placeholder="State"
+                     name="state" />
                </div>
                <div class="checkout-form-group">
                   <label>Postcode</label>
                   <input
                      required
                      type="text"
-                     placeholder="Postcode" />
+                     placeholder="Postcode"
+                     name="postcode" />
                </div>
             </div>
 
@@ -111,21 +119,23 @@
                   <input
                      required
                      type="email"
-                     placeholder="Email" />
+                     placeholder="Email"
+                     name="email" />
                </div>
                <div class="checkout-form-group">
                   <label>Phone</label>
                   <input
                      required
                      type="tel"
-                     placeholder="Phone" />
+                     placeholder="Phone"
+                     name="phone" />
                </div>
             </div>
 
             <!-- Notes -->
             <div class="checkout-form-group full-width">
                <label>Order Notes</label>
-               <textarea placeholder="Notes about your order"></textarea>
+               <textarea placeholder="Notes about your order" name="notes"></textarea>
             </div>
 
             <!-- Save Info -->

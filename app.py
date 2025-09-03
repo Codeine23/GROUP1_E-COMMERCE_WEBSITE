@@ -6,7 +6,7 @@ from functools import wraps
 from dotenv import load_dotenv 
 from data.dummy_data import products
 from utils.wishlist import add_to_wishlist_helper, remove_from_wishlist_helper, get_wishlist_items
-from utils.cart import add_to_cart, remove_from_cart, get_cart_items
+from utils.cart import add_to_cart, remove_from_cart, get_cart_items, update_quantity
 from utils.products import get_product
 
 
@@ -370,25 +370,6 @@ def logout():
 
 
 # -------- ADMIN ROUTES --------
-"""
-@app.route("/admin/admin_login", methods=["GET", "POST"])
-def admin_login():
-    if request.method == "POST":
-        username = request.form.get("username", "").strip()
-        password = request.form.get("password", "")
-
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-            session.clear()
-            session["is_admin"] = True
-            session["username"] = ADMIN_USERNAME
-            flash("Admin login successful.", "success")
-            return redirect(url_for("admin_dashboard"))
-
-        flash("Invalid admin credentials.", "danger")
-        return redirect(url_for("admin_login"))
-
-    return render_template("admin/admin_login.html")
-"""
 
 def admin_required(f):
     @wraps(f)
