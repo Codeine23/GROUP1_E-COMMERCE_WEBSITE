@@ -22,7 +22,8 @@
    <div class="checkout-grid">
       <!-- Left Column: Shipping Form -->
       <div class="checkout-form">
-         <form>
+
+         <form  id="checkout-form" method="POST" action="{{ url_for('checkout') }}">
             <!-- Country -->
             <div class="checkout-form-row">
                <div class="checkout-form-group full-width">
@@ -40,12 +41,14 @@
                <div class="checkout-form-group">
                   <label>First Name</label>
                   <input
+                     required
                      type="text"
                      placeholder="First Name" />
                </div>
                <div class="checkout-form-group">
                   <label>Last Name</label>
                   <input
+                     required
                      type="text"
                      placeholder="Last Name" />
                </div>
@@ -55,6 +58,7 @@
             <div class="checkout-form-group full-width">
                <label>Company Name (optional)</label>
                <input
+                  required
                   type="text"
                   placeholder="Company Name" />
             </div>
@@ -63,9 +67,11 @@
             <div class="checkout-form-group full-width">
                <label>Address</label>
                <input
+                  required
                   type="text"
                   placeholder="Street Address" />
                <input
+                  required
                   type="text"
                   placeholder="Apartment, suite, unit, etc. (optional)"
                   style="margin-top: 8px" />
@@ -75,6 +81,7 @@
             <div class="checkout-form-group full-width">
                <label>Town / City</label>
                <input
+                  required
                   type="text"
                   placeholder="City" />
             </div>
@@ -84,12 +91,14 @@
                <div class="checkout-form-group">
                   <label>State</label>
                   <input
+                     required
                      type="text"
                      placeholder="State" />
                </div>
                <div class="checkout-form-group">
                   <label>Postcode</label>
                   <input
+                     required
                      type="text"
                      placeholder="Postcode" />
                </div>
@@ -100,12 +109,14 @@
                <div class="checkout-form-group">
                   <label>Email Address</label>
                   <input
+                     required
                      type="email"
                      placeholder="Email" />
                </div>
                <div class="checkout-form-group">
                   <label>Phone</label>
                   <input
+                     required
                      type="tel"
                      placeholder="Phone" />
                </div>
@@ -167,6 +178,7 @@
          <div class="payment-options">
             <label>
                <input
+                  required
                   type="radio"
                   name="payment"
                   checked />
@@ -191,14 +203,23 @@
             <br />
             <label>
                <input
+                  required
                   type="radio"
                   name="payment" />
                Pay on Delivery
             </label>
          </div>
 
-         <button class="checkout-btn">Place Order</button>
+            <button
+               type="submit"
+               class="checkout-btn"
+               id="place-order-button"
+               disabled
+               >Place Order</button
+            >
+         </form>
       </div>
    </div>
 </section>
+<script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
 {% endblock %}

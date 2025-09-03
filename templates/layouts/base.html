@@ -51,7 +51,7 @@
             >
             <li class="dropdown">
                <a
-                  href="#"
+                  href="{{ url_for('categories') }}"
                   class="{% if request.endpoint == 'Categories' %}active{% endif %}">
                   Categories
                </a>
@@ -126,7 +126,7 @@
             {% endif %}
 
             <li>
-               <a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a>
+               <a href="{{ url_for('wishlist') }}"><i class="fa-solid fa-heart"></i> Wishlist</a>
             </li>
             <li>
                <a href="{{ url_for('cart') }}">

@@ -6,6 +6,10 @@
 @import url('auth.css');
 @import url('cart.css');
 @import url('checkout.css');
+@import url('productdetail.css');
+@import url('wishlist.css');
+@import url('categories.css');
+@import url("orderconfirmation.css");
 /* Theme variables */
 :root {
    --color-primary: #1e6ec9;

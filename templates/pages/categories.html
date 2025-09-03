@@ -1,0 +1,74 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="categories-container">
+   <h2>Shop by Categories</h2>
+
+   <!-- Category dropdown -->
+<form id="category-form" method="get" action="{{ url_for('categories') }}">
+   <label for="category-select">Select Category:</label>
+   <select name="category" id="category-select" class="category-dropdown">
+      <option value="featured" {% if selected_category == "featured" %}selected{% endif %}>
+         Featured
+      </option>
+      {% for category in categories %}
+      <option value="{{ category }}" {% if selected_category == category %}selected{% endif %}>
+         {{ category|capitalize }}
+      </option>
+      {% endfor %}
+   </select>
+</form>
+
+   <!-- Products Grid -->
+   <div class="product-grid">
+      {% if products %}
+         {% for product in products %}
+         <div class="product-card">
+            <div class="product-image-wrapper">
+               <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                  <img src="{{ product.image }}" alt="{{ product.name }}" />
+                  {% if product.discount %}
+                  <span class="discount-badge">{{ product.discount }}% OFF</span>
+                  {% endif %}
+               </a>
+            </div>
+
+            <div class="product-info">
+               <a href="{{ url_for('product_detail', product_id=product.id) }}">
+                  <h3 class="product-name">{{ product.name }}</h3>
+               </a>
+               <div class="product-meta">
+                  {% for tag in product.tags %}
+                  <span class="tag">{{ tag }}</span>
+                  {% endfor %}
+               </div>
+
+               <div class="price-sold">
+                  <span class="discount-price">${{ product.discount_price }}</span>
+                  {% if product.original_price %}
+                  <span class="original-price">${{ product.original_price }}</span>
+                  {% endif %}
+                  <span class="sold">
+                     <i class="fa fa-thumbs-up"></i>
+                     {{ product.sold.last30 if product.sold else 0 }} sold
+                  </span>
+               </div>
+
+               <div class="product-rating">
+                  ⭐ {{ product.rating }} ({{ product.reviews }} reviews)
+               </div>
+
+               <button class="cart-btn">
+                  <a href="{{ url_for('add', product_id=product.id) }}">
+                     <i class="fas fa-cart-plus"></i>
+                  </a>
+               </button>
+            </div>
+         </div>
+         {% endfor %}
+      {% else %}
+         <p>No products found in this category.</p>
+      {% endif %}
+   </div>
+</div>
+<script src="{{ url_for('static', filename='js/categories.js') }}"></script>
+{% endblock %}
