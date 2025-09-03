@@ -1,37 +1,31 @@
-{% extends "layouts/base.html" %} {% block content %}
+{% extends "layouts/base.html" %}
+{% block content %}
 <section class="checkout-container">
    <!-- Breadcrumbs -->
    <nav class="breadcrumbs">
-      <a
-         class="breadcrumb-grey"
-         href="{{ url_for('home') }}"
-         >Home</a
-      >
-      /
-      <a
-         class="breadcrumb-grey"
-         href="{{url_for('cart')}}">
-         Cart
-      </a>
-      / <a class="breadcrumb-active">Checkout</a>
+      <a class="breadcrumb-grey" href="{{ url_for('home') }}">Home</a> /
+      <a class="breadcrumb-grey" href="{{ url_for('cart') }}">Cart</a> /
+      <a class="breadcrumb-active">Checkout</a>
    </nav>
 
    <!-- Page Title -->
    <h2 class="page-title products-section-header">Billing Details</h2>
 
-   <div class="checkout-grid">
-      <!-- Left Column: Shipping Form -->
-      <div class="checkout-form">
+   <!-- ✅ ONE single form wrapping everything -->
+   <form id="checkout-form" method="POST" action="{{ url_for('checkout') }}">
+      <div class="checkout-grid">
+         
+         <!-- Left Column: Shipping Form -->
+         <div class="checkout-form">
 
-         <form  id="checkout-form" method="POST" action="{{ url_for('checkout') }}">
             <!-- Country -->
             <div class="checkout-form-row">
                <div class="checkout-form-group full-width">
                   <label>Country</label>
-                  <select name="country">
-                     <option>Nigeria</option>
-                     <option>United States</option>
-                     <option>United Kingdom</option>
+                  <select name="country" required>
+                     <option value="Nigeria">Nigeria</option>
+                     <option value="United States">United States</option>
+                     <option value="United Kingdom">United Kingdom</option>
                   </select>
                </div>
             </div>
@@ -40,75 +34,42 @@
             <div class="checkout-form-row">
                <div class="checkout-form-group">
                   <label>First Name</label>
-                  <input
-                     required
-                     type="text"
-                     placeholder="First Name"
-                     name="first_name" />
+                  <input required type="text" placeholder="First Name" name="first_name" />
                </div>
                <div class="checkout-form-group">
                   <label>Last Name</label>
-                  <input
-                     required
-                     type="text"
-                     placeholder="Last Name"
-                     name="last_name" />
+                  <input required type="text" placeholder="Last Name" name="last_name" />
                </div>
             </div>
 
             <!-- Company -->
             <div class="checkout-form-group full-width">
                <label>Company Name (optional)</label>
-               <input
-                  required
-                  type="text"
-                  placeholder="Company Name"
-                  name="company" />
+               <input type="text" placeholder="Company Name" name="company" />
             </div>
 
             <!-- Address -->
             <div class="checkout-form-group full-width">
                <label>Address</label>
-               <input
-                  required
-                  type="text"
-                  placeholder="Street Address"
-                  name="address" />
-               <input
-                  required
-                  type="text"
-                  placeholder="Apartment, suite, unit, etc. (optional)"
-                  name="apartment"
-                  style="margin-top: 8px" />
+               <input required type="text" placeholder="Street Address" name="address" />
+               <input type="text" placeholder="Apartment, suite, unit, etc. (optional)" name="apartment" style="margin-top: 8px" />
             </div>
 
             <!-- City -->
             <div class="checkout-form-group full-width">
                <label>Town / City</label>
-               <input
-                  required
-                  type="text"
-                  placeholder="City"
-                  name="city" />
+               <input required type="text" placeholder="City" name="city" />
             </div>
 
             <!-- State + Postcode -->
             <div class="checkout-form-row">
                <div class="checkout-form-group">
                   <label>State</label>
-                  <input
-                     required
-                     type="text"
-                     placeholder="State"
-                     name="state" />
+                  <input required type="text" placeholder="State" name="state" />
                </div>
                <div class="checkout-form-group">
                   <label>Postcode</label>
-                  <input
-                     required
-                     type="text"
-                     placeholder="Postcode"
-                     name="postcode" />
+                  <input required type="text" placeholder="Zipcode" name="postcode" />
                </div>
             </div>
 
@@ -116,19 +77,11 @@
             <div class="checkout-form-row">
                <div class="checkout-form-group">
                   <label>Email Address</label>
-                  <input
-                     required
-                     type="email"
-                     placeholder="Email"
-                     name="email" />
+                  <input required type="email" placeholder="Email" name="email" />
                </div>
                <div class="checkout-form-group">
                   <label>Phone</label>
-                  <input
-                     required
-                     type="tel"
-                     placeholder="Phone"
-                     name="phone" />
+                  <input required type="tel" placeholder="Phone" name="phone" />
                </div>
             </div>
 
@@ -140,95 +93,63 @@
 
             <!-- Save Info -->
             <div class="form-check">
-               <input
-                  type="checkbox"
-                  id="save-info" />
-               <label for="save-info"
-                  >Save this information for faster checkout next time</label
-               >
+               <input type="checkbox" id="save-info" />
+               <label for="save-info">Save this information for faster checkout next time</label>
             </div>
-         </form>
-      </div>
+         </div>
 
-      <!-- Right Column: Order Summary & Payment -->
-      <div class="checkout-summary">
-         <!-- Example products -->
-
-         <div class="checkout-summary-row">
-            {% for item in cart_items %}
-            <div class="checkout-cart-item">
-               <div class="cart-item-info">
-                  <span class="product-name"
-                     >{{ item.name}} <i class="fa-solid fa-xmark"></i> {{
-                     item.quantity }}</span
-                  >
+         <!-- Right Column: Order Summary & Payment -->
+         <div class="checkout-summary">
+            
+            <!-- Cart Items -->
+            <div class="checkout-summary-row">
+               {% for item in cart_items %}
+               <div class="checkout-cart-item">
+                  <div class="cart-item-info">
+                     <span class="product-name">{{ item.name }} <i class="fa-solid fa-xmark"></i> {{ item.quantity }}</span>
+                  </div>
+                  <div class="subtotal">${{ item.subtotal }}</div>
                </div>
-               <div class="subtotal">${{item.subtotal}}</div>
+               {% endfor %}
+               <div class="checkout-cart-item">
+                  <span class="checkout-indent">Subtotal:</span>
+                  <span>${{ subtotal }}</span>
+               </div>
             </div>
-            {% endfor %}
 
-            <div class="checkout-cart-item">
-               <span class="checkout-indent">Subtotal:</span>
-               <span>${{ subtotal }}</span>
+            <!-- Totals -->
+            <div class="summary-row">
+               <span class="checkout-indent">Shipping: </span>
+               <span>${{ shipping }}</span>
             </div>
-         </div>
+            <div class="summary-row total">
+               <span class="checkout-indent">Total: </span>
+               <span>${{ total }}</span>
+            </div>
 
-         <!-- Totals -->
+            <!-- Payment Options -->
+            <div class="payment-options">
+               <label>
+                  <input type="radio" name="payment" value="bank" required />
+                  Bank Payment
+                  <img src="/static/images/more/Visa.png" alt="Visa" class="pay-logo" />
+                  <img src="/static/images/more/Mastercard.png" alt="Mastercard" class="pay-logo" />
+                  <img src="/static/images/more/Bkash.png" alt="Bkash" class="pay-logo" />
+                  <img src="/static/images/more/Nagad.png" alt="Nagad" class="pay-logo" />
+               </label>
+               <br />
+               <label>
+                  <input type="radio" name="payment" value="pod" required />
+                  Pay on Delivery
+               </label>
+            </div>
 
-         <div class="summary-row">
-            <span class="checkout-indent">Shipping: </span>
-            <span>${{ shipping }}</span>
+            <!-- Submit Button -->
+            <button type="submit" class="checkout-btn" id="place-order-button">Place Order</button>
          </div>
-         <div class="summary-row total">
-            <span class="checkout-indent">Total: </span>
-            <span>${{ total }}</span>
-         </div>
-
-         <!-- Payment Options -->
-         <div class="payment-options">
-            <label>
-               <input
-                  required
-                  type="radio"
-                  name="payment"
-                  checked />
-               Bank Payment
-               <img
-                  src="/static/images/more/Visa.png"
-                  alt="Visa"
-                  class="pay-logo" />
-               <img
-                  src="/static/images/more/Mastercard.png"
-                  alt="Mastercard"
-                  class="pay-logo" />
-               <img
-                  src="/static/images/more/Bkash.png"
-                  alt="Bkash"
-                  class="pay-logo" />
-               <img
-                  src="/static/images/more/Nagad.png"
-                  alt="Nagad"
-                  class="pay-logo" />
-            </label>
-            <br />
-            <label>
-               <input
-                  required
-                  type="radio"
-                  name="payment" />
-               Pay on Delivery
-            </label>
-         </div>
-
-            <button
-               type="submit"
-               class="checkout-btn"
-               id="place-order-button"
-               >Place Order</button
-            >
-         </form>
       </div>
-   </div>
+   </form>
 </section>
+
 <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
 {% endblock %}
