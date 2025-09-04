@@ -18,6 +18,7 @@
 }
 .product-detail-image img {
    width: 560px;
+   max-width: 100%;
 }
 
 .product-info > .product-name {

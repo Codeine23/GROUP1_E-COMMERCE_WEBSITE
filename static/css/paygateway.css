@@ -1,5 +1,5 @@
-.fake-payment {
-  max-width: 400px;
+.payment-gateway {
+  max-width: 450px;
   margin: 80px auto;
   padding: 2rem;
   background: #ffffff;
@@ -8,47 +8,77 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.fake-payment h2 {
+.payment-gateway h2 {
   text-align: center;
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: #222;
 }
 
-.fake-payment p {
+.payment-gateway p {
   text-align: center;
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
   color: #555;
 }
 
-.fake-payment form {
+.payment-gateway form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
 }
 
-.fake-payment label {
+.form-group label {
   font-size: 0.9rem;
   margin-bottom: 0.3rem;
   color: #444;
 }
 
-.fake-payment input {
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.input-icon input {
+  padding-left: 40px;
+}
+
+.payment-gateway input {
   padding: 0.75rem;
-  margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
   transition: border 0.2s, box-shadow 0.2s;
 }
 
-.fake-payment input:focus {
+.payment-gateway input:focus {
   border-color: #0077ff;
   box-shadow: 0 0 4px rgba(0, 119, 255, 0.3);
   outline: none;
 }
 
-.fake-payment button {
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .half {
+  flex: 1;
+}
+
+.payment-gateway button {
   background: #0077ff;
   color: #fff;
   font-size: 1rem;
@@ -59,6 +89,6 @@
   transition: background 0.2s ease-in-out;
 }
 
-.fake-payment button:hover {
+.payment-gateway button:hover {
   background: #005ecc;
 }
