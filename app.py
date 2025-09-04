@@ -112,6 +112,9 @@ def categories():
         selected_category=selected_category
     )
 
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
 
 
 @app.route("/best-selling")
@@ -315,29 +318,10 @@ def remove_from_wishlist(product_id):
 def contact():
     return render_template("pages/contact_us.html")
 
-@app.route("/gadgets")
-def gadget():
-    return render_template("pages/gadgets.html")
 
 @app.route("/about")
 def about():
     return render_template("pages/about.html")
-
-@app.route("/last30days")
-def last_days():
-    return render_template("pages/last30days.html")
-
-@app.route("/shoes")
-def shoes():
-    return render_template("pages/shoes.html")
-
-@app.route("/men_clothings")
-def men():
-    return render_template("pages/men_clothings.html")
-
-@app.route("/women_clothings")
-def women():
-    return render_template("pages/women_clothings.html")
 
 @app.route("/search")
 def search():

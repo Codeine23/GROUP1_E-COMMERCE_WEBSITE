@@ -126,7 +126,9 @@
             {% endif %}
 
             <li>
-               <a href="{{ url_for('wishlist') }}"><i class="fa-solid fa-heart"></i> Wishlist</a>
+               <a href="{{ url_for('wishlist') }}"
+                  ><i class="fa-solid fa-heart"></i> Wishlist</a
+               >
             </li>
             <li>
                <a href="{{ url_for('cart') }}">
@@ -160,6 +162,7 @@
       </main>
 
       <!-- Footer -->
+      <!-- Footer -->
       <footer class="footer">
          <div class="footer-container">
             <!-- Exclusive -->
@@ -180,20 +183,24 @@
             <!-- Support -->
             <div class="footer-col">
                <h4>Support</h4>
-               <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
-               <p>exclusive@gmail.com</p>
-               <p>+88015-88888-9999</p>
+               <p>University of Uyo, Akwa Ibom State, Uyo, Nigeria.</p>
+               <p>exclusive.ng@gmail.com</p>
+               <p>+2348012345678</p>
             </div>
 
             <!-- Account -->
             <div class="footer-col">
                <h4>Account</h4>
                <ul>
-                  <li><a href="#">My Account</a></li>
-                  <li><a href="#">Login / Register</a></li>
-                  <li><a href="#">Wishlist</a></li>
-                  <li><a href="#">Cart</a></li>
-                  <li><a href="#">Shop</a></li>
+                  <li><a href="{{ url_for('profile') }}">My Account</a></li>
+                  <li
+                     ><a href="{{ url_for('register') }}"
+                        >Login / Register</a
+                     ></li
+                  >
+                  <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
+                  <li><a href="{{ url_for('cart') }}">Cart</a></li>
+                  <li><a href="{{ url_for('home') }}">Shop</a></li>
                </ul>
             </div>
 
@@ -204,7 +211,7 @@
                   <li><a href="#">Privacy Policy</a></li>
                   <li><a href="#">Terms of Use</a></li>
                   <li><a href="#">FAQ</a></li>
-                  <li><a href="#">Contact</a></li>
+                  <li><a href="{{ url_for('contact') }}">Contact</a></li>
                </ul>
             </div>
 
