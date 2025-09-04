@@ -112,6 +112,7 @@ def categories():
         selected_category=selected_category
     )
 
+
 @app.route("/profile")
 def profile():
     return render_template("profile.html")
@@ -323,10 +324,6 @@ def contact():
 def about():
     return render_template("pages/about.html")
 
-@app.route("/search")
-def search():
-    query = request.args.get("q")
-    return f"Search results for: {query}"
 
 
 #------------ AUTH ------------

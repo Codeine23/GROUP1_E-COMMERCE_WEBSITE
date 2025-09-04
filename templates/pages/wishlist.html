@@ -15,7 +15,7 @@
             alt="{{ item.name }}" />
          <div class="wishlist-info">
             <h3 class="wishlist-name">{{ item.name }}</h3>
-            <p class="wishlist-price">₦{{ item.discount_price }}</p>
+            <p class="wishlist-price">${{ item.discount_price }}</p>
             <p class="wishlist-meta">{{ item.sold.last30 }} sold</p>
          </div>
 
@@ -29,7 +29,7 @@
                   >
                </form>
                <form
-                method="POST"
+                  method="POST"
                   action="{{ url_for('remove_from_wishlist', product_id=item.id) }}">
                   <button
                      type="submit"
